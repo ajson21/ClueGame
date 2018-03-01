@@ -1,5 +1,9 @@
 package experiment;
-
+/**
+ * 
+ * @author ajson, jasonyu
+ *
+ */
 public class BoardCell {
 	private int row;
 	private int column;
