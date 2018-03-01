@@ -17,6 +17,7 @@ public class IntBoard {
 		super();
 		
 		grid = new BoardCell[4][4];
+		
 		for(int i = 0; i < 4; i++){
 			
 			for(int j = 0; j < 4; j++){
@@ -43,14 +44,13 @@ public class IntBoard {
 			for(int j = 0; j < 4; j++){
 				
 				BoardCell current = grid[i][j];
-				System.out.println(current);
 				Set<BoardCell> currentSet = new HashSet<BoardCell>();
 	
 				for(int r = -1; r < 2; r+=2){
 					
 					if(!(current.getRow() + r == -1 || current.getRow() + r == 4)){
-						
-						currentSet.add(new BoardCell(current.getRow() + r,current.getColumn()));
+
+						currentSet.add(grid[current.getRow()+r][current.getColumn()]);
 						
 					}
 					
@@ -59,8 +59,8 @@ public class IntBoard {
 				for(int c = -1; c < 2; c+=2){
 					
 					if(!(current.getColumn() + c == -1 || current.getColumn() + c == 4)){
-						
-						currentSet.add(new BoardCell(current.getRow(),current.getColumn()+c));
+
+						currentSet.add(grid[current.getRow()][current.getColumn()+c]);
 						
 					}
 					
