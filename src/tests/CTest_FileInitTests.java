@@ -1,3 +1,8 @@
+/**
+ * 
+ * @author ajson, jasonyu
+ * Testing class to make sure the board works. 
+ */
 package tests;
 
 /*
@@ -98,7 +103,7 @@ public class CTest_FileInitTests {
 			}
 		Assert.assertEquals(16, numDoors);
 	}
-
+	
 	// Test a few room cells to ensure the room initial is correct.
 	@Test
 	public void testRoomInitials() {
