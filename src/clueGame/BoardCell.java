@@ -53,11 +53,9 @@ public class BoardCell {
 		return Direction;
 	}
 
-	public Character[] getInitial() {
+	public char getInitial() {
 		// TODO Auto-generated method stub
-		Character[] temp = new Character[1];
-		temp[0] = initial.charAt(0);
-		return temp;
+		return initial.charAt(0);
 	}
 	
 }

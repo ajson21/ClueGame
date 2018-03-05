@@ -24,10 +24,10 @@ public class Board {
 	
 	private String csv_file;
 	private String legend_file; 
+	
 	private HashMap<BoardCell, Set<BoardCell>> adjMtx;
 	private Set<BoardCell> targets = new HashSet<BoardCell>();
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
-	
 	private Map<Character,String> legend = new HashMap<Character,String>();
 	
 	// constructor is private to ensure only one can be created	
@@ -37,82 +37,34 @@ public class Board {
 	public static Board getInstance() {
 		return theInstance;
 	}
-	
-	public void initialize(){
+	/**
+	 * Initialize calls loadRoomConfig and loadBoardConfig, which both have the exceptions needed.
+	 */
+	public void initialize() {
 		
 		try{
-			FileReader reader = new FileReader(legend_file);
-			Scanner in = new Scanner(reader);
-			in.useDelimiter(",");
-			
-			while(in.hasNext()){
-				String input = in.nextLine();
-				String[] temp = input.split(", ");
-				
-				legend.put(temp[0].charAt(0),temp[1]);
-			}
-			
-			
-		} catch (FileNotFoundException e){
-			e.printStackTrace();
+			loadRoomConfig();
+			loadBoardConfig();
+		}catch(BadConfigFormatException e){
+			System.out.println(e.getMessage());
 		}
-		
-		try {
-			FileReader reader = new FileReader(csv_file);
-			Scanner in = new Scanner(reader);
-			ArrayList<String> input = new ArrayList<String>();
-			
-			in.useDelimiter(",");
-			
-			int col_counter = 0;
-			int row_counter = 0;
-			
-			while(in.hasNext()){
-				
-				String temp = in.nextLine();
-				row_counter++;
-				String sep[] = temp.split(",");
-				col_counter = sep.length;
-				
-				for(int i = 0; i < sep.length; i++){
-					input.add(sep[i]);
-				}
-				
-			}
-		
-			grid = new BoardCell[row_counter][col_counter];
-			int counter = 0;
-			for(int i = 0; i < row_counter; i++){
-				for(int j = 0; j < col_counter; j++){
-					grid[i][j] = new BoardCell(i,j,input.get(counter));
-					counter++;
-				}
-			}
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
 		
 	}
-	
+
 	public HashMap<BoardCell, Set<BoardCell>>calcAdjacencies(){
 		
 		HashMap<BoardCell, Set<BoardCell>> result = new HashMap<BoardCell, Set<BoardCell>>();
 		
 		for(int i = 0; i < grid.length; i++){
 			
-			for(int j = 0; j < grid[0].length; j++){
+			for(int j = 0; j < grid[i].length; j++){
 				
 				BoardCell current = grid[i][j];
 				Set<BoardCell> currentSet = new HashSet<BoardCell>();
 	
 				for(int r = -1; r < 2; r+=2){
 					
-					if(!(current.getRow() + r == -1 || current.getRow() + r == 4)){
+					if(!(current.getRow() + r == -1 || current.getRow() + r == grid.length)){
 
 						currentSet.add(grid[current.getRow()+r][current.getColumn()]);
 						
@@ -122,7 +74,7 @@ public class Board {
 				
 				for(int c = -1; c < 2; c+=2){
 					
-					if(!(current.getColumn() + c == -1 || current.getColumn() + c == 4)){
+					if(!(current.getColumn() + c == -1 || current.getColumn() + c == grid[0].length)){
 
 						currentSet.add(grid[current.getRow()][current.getColumn()+c]);
 						
@@ -209,16 +161,108 @@ public class Board {
 	public BoardCell getCellAt(int i, int j) {
 		return grid[i][j];
 	}
-
-	public void loadRoomConfig() {
+/**
+ * loadRoomConfig tests to see that all symbols in legend are consistent and the symbols in the board match up.
+ * @throws BadConfigFormatException
+ */
+	public void loadRoomConfig() throws BadConfigFormatException {
 		
+		try{
+			FileReader reader = new FileReader(legend_file);
+			Scanner in = new Scanner(reader);
+			in.useDelimiter(",");
+			
+			while(in.hasNext()){
+				String input = in.nextLine();
+				String[] temp = input.split(", ");
+				
+				if(!temp[2].equalsIgnoreCase("Card") || !temp[2].equalsIgnoreCase("Other")){
+					throw new BadConfigFormatException("Incorrect legend configuration");
+				}
+				
+				legend.put(temp[0].charAt(0),temp[1]);
+			}
+			
+			
+		} catch (FileNotFoundException e){
+			e.printStackTrace();
+		}
 		
 	}
-
-	public void loadBoardConfig() {
+/**
+ * Ensures that the columns and rows are of consistent size, if a column is missing an element, something is wrong.
+ * @throws BadConfigFormatException
+ */
+	public void loadBoardConfig() throws BadConfigFormatException {
 		
+		try {
+			FileReader reader = new FileReader(csv_file);
+			Scanner in = new Scanner(reader);
+			ArrayList<String> input = new ArrayList<String>();
+			
+			int previous_col_elements = 0;
+			
+			in.useDelimiter(",");
+			
+			int col_counter = 0;
+			int row_counter = 0;
+			
+			while(in.hasNext()){
+				
+				
+				String temp = in.nextLine();
+				String sep[] = temp.split(",");
+				
+				col_counter = sep.length;
+				
+				if(row_counter == 0){
+					previous_col_elements = col_counter;
+				} else {
+					if(previous_col_elements!= col_counter){
+						throw new BadConfigFormatException("Inconsisent column elements.");
+					}
+				}
+				
+				row_counter++;
+				
+				for(int i = 0; i < sep.length; i++){
+					
+					boolean existsInLegend = false;
+					
+					for(Character key : legend.keySet()){
+						
+						if(sep[i].charAt(0) == key){
+							existsInLegend = true;
+						}
+						
+					}
+					
+					if(!existsInLegend){
+						throw new BadConfigFormatException("Detected room not in legend.");
+					}
+					
+					input.add(sep[i]);
+				}
+				
+			}
+		
+			grid = new BoardCell[row_counter][col_counter];
+			int counter = 0;
+			for(int i = 0; i < row_counter; i++){
+				for(int j = 0; j < col_counter; j++){
+					grid[i][j] = new BoardCell(i,j,input.get(counter));
+					counter++;
+				}
+			}
+			
+			adjMtx = new HashMap<BoardCell,Set<BoardCell>>();
+			adjMtx = calcAdjacencies();
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
-	
 	
 }
