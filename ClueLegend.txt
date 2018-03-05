@@ -1,0 +1,11 @@
+H, Hotbox, Card
+D, Dungeon, Card
+T, Theater, Card
+S, Study, Card
+G, Gameroom, Card
+K, Kitchen, Card
+L, Living Room, Card
+A, Art Room, Card
+B, Bar, Card
+C, Closet, Other
+W, Walkway, Other

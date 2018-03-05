@@ -9,11 +9,25 @@ public class BoardCell {
 	private int row;
 	private int column;
 	private DoorDirection Direction;
+	private String initial;
 	
-	public BoardCell(int row, int column) {
+	public BoardCell(int row, int column, String initial) {
 		super();
 		this.row = row;
 		this.column = column;
+		this.initial = initial;
+		if(initial.length()==2){
+			String temp = initial.substring(1);
+			if(temp.equals("U")){
+				Direction = DoorDirection.UP;
+			}else if(temp.equals("R")){
+				Direction = DoorDirection.RIGHT;
+			}else if(temp.equals("D")){
+				Direction = DoorDirection.DOWN;
+			}else{
+				Direction = DoorDirection.LEFT;
+			}
+		}
 	}
 
 	public int getRow() {
@@ -26,17 +40,24 @@ public class BoardCell {
 
 	public boolean isDoorway() {
 		// TODO Auto-generated method stub
+		if(initial.length() != 1){
+			if(initial.substring(1, 2).equals("U") || initial.substring(1, 2).equals("R") || initial.substring(1, 2).equals("D") || initial.substring(1, 2).equals("L")){
+				return true;
+			}
+		}
 		return false;
 	}
 
-	public Object getDoorDirection() {
+	public DoorDirection getDoorDirection() {
 		// TODO Auto-generated method stub
-		return null;
+		return Direction;
 	}
 
-	public Object getInitial() {
+	public Character[] getInitial() {
 		// TODO Auto-generated method stub
-		return null;
+		Character[] temp = new Character[1];
+		temp[0] = initial.charAt(0);
+		return temp;
 	}
 	
 }
