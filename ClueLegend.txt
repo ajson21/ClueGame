@@ -9,3 +9,4 @@ A, Art Room, Card
 B, Bar, Card
 C, Closet, Other
 W, Walkway, Other
+X, Main, Other

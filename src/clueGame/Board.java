@@ -93,19 +93,19 @@ public class Board {
 		
 	}
 	
-	public Set<BoardCell> getAdjList(BoardCell cell){
+	public Set<BoardCell> getAdjList(int x, int y){
 		
 		Set<BoardCell> result = new HashSet<BoardCell>();
 		
-		result = adjMtx.get(cell);
+		result = adjMtx.get(getCellAt(x,y));
 		
 		return result;
 		
 	}
 
-	public void calcTargets(BoardCell startCell, int pathLength){
+	public void calcTargets(int x, int y, int pathLength){
 		
-		for(BoardCell adjCell: adjMtx.get(startCell)){
+		for(BoardCell adjCell: adjMtx.get(getCellAt(x,y))){
 			
 			if(!visited.contains(adjCell)){
 				
@@ -117,7 +117,7 @@ public class Board {
 				
 				} else {
 					
-					calcTargets(adjCell,pathLength--);
+					calcTargets(adjCell.getRow(),adjCell.getColumn(),pathLength--);
 				
 				}
 				
@@ -176,7 +176,9 @@ public class Board {
 				String input = in.nextLine();
 				String[] temp = input.split(", ");
 				
-				if(!temp[2].equalsIgnoreCase("Card") || !temp[2].equalsIgnoreCase("Other")){
+				if(temp[2].equalsIgnoreCase("Card") || temp[2].equalsIgnoreCase("Other")){
+					
+				}else{
 					throw new BadConfigFormatException("Incorrect legend configuration");
 				}
 				
