@@ -27,7 +27,7 @@ public class ClueBoardAdjTargetTests {
 	
 	
 	@Test
-	public void walkwayAdj(){
+	public void adjWalkway(){
 
 		Set<BoardCell> testList = board.getAdjList(8, 7);
 		assertEquals(4, testList.size());
@@ -179,32 +179,58 @@ public class ClueBoardAdjTargetTests {
 		board.calcTargets(9, 5, 1);
 		Set<BoardCell> targets= board.getTargets();
 		assertEquals(4, targets.size());
+		assertTrue(targets.contains(board.getCellAt(9, 6)));
+		assertTrue(targets.contains(board.getCellAt(9, 4)));
+		assertTrue(targets.contains(board.getCellAt(8, 5)));
+		assertTrue(targets.contains(board.getCellAt(10, 5)));
 		
 
 		board.calcTargets(10, 6, 2);
 		targets=board.getTargets();
-		assertEquals(8, targets.size());
+		assertEquals(5, targets.size());
+		assertTrue(targets.contains(board.getCellAt(12, 6)));
+		assertTrue(targets.contains(board.getCellAt(8, 6)));
+		assertTrue(targets.contains(board.getCellAt(10, 4)));
+		assertTrue(targets.contains(board.getCellAt(10, 8)));
+		assertTrue(targets.contains(board.getCellAt(9, 5)));
+		assertTrue(targets.contains(board.getCellAt(9, 7)));
+		assertTrue(targets.contains(board.getCellAt(11, 5)));
+		assertTrue(targets.contains(board.getCellAt(11, 7)));
 		
 
 		board.calcTargets(13, 7, 3);
 		targets=board.getTargets();
-		assertEquals(14, targets.size());
+		assertEquals(11, targets.size());
+		assertTrue(targets.contains(board.getCellAt(10, 7)));
+		assertTrue(targets.contains(board.getCellAt(11, 6)));
+		assertTrue(targets.contains(board.getCellAt(12, 5)));
+		assertTrue(targets.contains(board.getCellAt(13, 4)));
+		assertTrue(targets.contains(board.getCellAt(14, 5)));
+		assertTrue(targets.contains(board.getCellAt(15, 6)));
+		assertTrue(targets.contains(board.getCellAt(16, 7)));
+		assertTrue(targets.contains(board.getCellAt(15, 8)));
+		assertTrue(targets.contains(board.getCellAt(14, 9)));
+		assertTrue(targets.contains(board.getCellAt(13, 10)));
+		assertTrue(targets.contains(board.getCellAt(11, 8)));
 
 		board.calcTargets(0, 18, 4);
 		targets=board.getTargets();
 		assertEquals(1, targets.size());
+		assertTrue(targets.contains(board.getCellAt(4, 18)));
 	}
 	
 	@Test
 	public void roomTargets(){
 		
-		board.calcTargets(8, 5, 1);
+		board.calcTargets(7, 3, 1);
 		Set<BoardCell> targets = board.getTargets();
-		assertTrue(targets.contains(board.getCellAt(7, 5)));
+		assertEquals(1, targets.size());
+		assertTrue(targets.contains(board.getCellAt(8, 3)));
 		
-		board.calcTargets(15, 18, 2);
+		board.calcTargets(15, 14, 2);
 		targets= board.getTargets();
-		assertTrue(targets.contains(board.getCellAt(17, 18)));
+		assertEquals(1, targets.size());
+		assertTrue(targets.contains(board.getCellAt(14, 14)));
 		
 	}
 	
@@ -213,11 +239,13 @@ public class ClueBoardAdjTargetTests {
 		
 		board.calcTargets(5, 17, 1);
 		Set<BoardCell> targets = board.getTargets();
+		assertEquals(1, targets.size());
 		assertTrue(targets.contains(board.getCellAt(6, 17)));
 		
 
 		board.calcTargets(20, 7, 1);
 		targets = board.getTargets();
+		assertEquals(1, targets.size());
 		assertTrue(targets.contains(board.getCellAt(20,8)));
 		
 		
