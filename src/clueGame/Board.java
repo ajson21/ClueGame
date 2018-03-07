@@ -105,6 +105,13 @@ public class Board {
 
 	public void calcTargets(int x, int y, int pathLength){
 		
+		emptyTargetSets();
+		recursiveCalcTargets(x, y, pathLength);
+		
+	}
+	
+	public void recursiveCalcTargets(int x, int y, int pathLength){
+		
 		for(BoardCell adjCell: adjMtx.get(getCellAt(x,y))){
 			
 			if(!visited.contains(adjCell)){
@@ -160,6 +167,15 @@ public class Board {
 
 	public BoardCell getCellAt(int i, int j) {
 		return grid[i][j];
+	}
+	
+	public boolean isRoom(int i, int j){
+		char roomInitial = grid[i][j].getInitial();
+		if(roomInitial == 'X' || roomInitial == 'W'){
+			return false;
+		}
+		return true;
+		
 	}
 /**
  * loadRoomConfig tests to see that all symbols in legend are consistent and the symbols in the board match up.

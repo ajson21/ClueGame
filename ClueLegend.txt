@@ -7,6 +7,6 @@ K, Kitchen, Card
 L, Living Room, Card
 A, Art Room, Card
 B, Bar, Card
-C, Closet, Other
+C, Computer Room, Card
+X, Closet, Other
 W, Walkway, Other
-X, Main, Other
