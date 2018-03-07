@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
@@ -62,6 +63,8 @@ public class Board {
 				BoardCell current = grid[i][j];
 				Set<BoardCell> currentSet = new HashSet<BoardCell>();
 	
+				
+				
 				for(int r = -1; r < 2; r+=2){
 					
 					if(!(current.getRow() + r == -1 || current.getRow() + r == grid.length)){
@@ -80,8 +83,122 @@ public class Board {
 						
 					}
 					
+				}
+
+				Set<BoardCell> toBeRemoved = new HashSet<BoardCell>();
+				
+				for(BoardCell added : currentSet){
+					
+					boolean ableToAdd = false;
+			
+					// Walkway case
+					if(current.getInitial() == 'W'){
+						
+						if(added.getInitial() == 'W'){
+
+							ableToAdd = true;
+							
+						} else if (added.getInitial() != 'W'){
+							
+							if(added.isDoorway()){
+								
+								DoorDirection temp = added.getDoorDirection();
+								
+								switch (temp){
+								
+									case RIGHT:
+										
+										if(added.getColumn() + 1 == current.getColumn()){
+											
+											ableToAdd = true;
+											
+										}
+										
+										break;
+										
+									case LEFT:
+										if(added.getColumn() - 1 == current.getColumn()){
+											
+											ableToAdd = true;
+											
+										}
+										
+										break;
+										
+									case UP:
+										if(added.getRow() - 1 == current.getRow()){
+											
+											ableToAdd = true;
+											
+										}
+										
+										break;
+										
+									case DOWN:
+										if(added.getRow() + 1 == current.getRow()){
+											
+											ableToAdd = true;
+											
+										}
+										
+										break;
+										
+								}
+								
+							}
+							
+						}
+						
+					}else if (current.getInitial() != 'W'){
+						
+						if(current.isDoorway()){
+							
+							DoorDirection temp = current.getDoorDirection();
+							
+							switch (temp){
+							
+							case RIGHT:
+								if(added.getColumn() - 1 == current.getColumn()){
+									ableToAdd = true;
+								}
+								break;
+							case LEFT:
+								if(added.getColumn() + 1 == current.getColumn()){
+									ableToAdd = true;
+								}
+								break;
+							case UP:
+								if(added.getRow() + 1 == current.getRow()){
+									ableToAdd = true;
+								}
+								break;
+							case DOWN:
+								if(added.getRow() - 1 == current.getRow()){
+									ableToAdd = true;
+								}
+								break;
+								
+							}
+							
+						}
+						
+					}
+					
+					if(!ableToAdd){
+						
+						toBeRemoved.add(added);
+						
+					}
 					
 				}
+				
+				for(BoardCell remove : toBeRemoved){
+					
+					currentSet.remove(remove);
+					
+				}
+				
+				System.out.println(current.getRow() + " " + current.getColumn() + " " + currentSet.size());
 				
 				result.put(current,currentSet);
 				

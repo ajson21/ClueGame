@@ -29,12 +29,12 @@ public class ClueBoardAdjTargetTests {
 	@Test
 	public void adjWalkway(){
 
-		Set<BoardCell> testList = board.getAdjList(8, 7);
+		Set<BoardCell> testList = board.getAdjList(9, 7);
 		assertEquals(4, testList.size());
-		assertTrue(testList.contains(board.getCellAt(8, 8)));
-		assertTrue(testList.contains(board.getCellAt(8, 6)));
-		assertTrue(testList.contains(board.getCellAt(9, 7)));
-		assertTrue(testList.contains(board.getCellAt(7, 7)));
+		assertTrue(testList.contains(board.getCellAt(9, 8)));
+		assertTrue(testList.contains(board.getCellAt(9, 6)));
+		assertTrue(testList.contains(board.getCellAt(10, 7)));
+		assertTrue(testList.contains(board.getCellAt(8, 7)));
 		
 	}
 	
@@ -48,11 +48,9 @@ public class ClueBoardAdjTargetTests {
 	
 	@Test
 	public void insideDoorway1(){
-		
 		Set<BoardCell> testList = board.getAdjList(7, 3);
 		assertEquals(1, testList.size());
 		assertTrue(testList.contains(board.getCellAt(8, 3)));
-		
 	}
 	
 	@Test
