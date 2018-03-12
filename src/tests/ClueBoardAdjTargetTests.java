@@ -12,19 +12,18 @@ import clueGame.BoardCell;
 
 public class ClueBoardAdjTargetTests {
 	
+	
 	private static Board board;
 	@BeforeClass
 	public static void setUp() {
 		// Board is singleton, get the only instance
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("CTest_ClueLayout.csv", "CTest_ClueLegend.txt");		
+		board.setConfigFiles("ClueLayout.csv", "ClueLegend.txt");		
 		// Initialize will load BOTH config files 
 		board.initialize();
-		System.out.println(board);
 		
 	}
-	
 	
 	@Test
 	public void adjWalkway(){
@@ -44,6 +43,7 @@ public class ClueBoardAdjTargetTests {
 		Set<BoardCell> testList = board.getAdjList(1, 1);
 		assertEquals(0, testList.size());
 		
+		
 	}
 	
 	@Test
@@ -56,9 +56,9 @@ public class ClueBoardAdjTargetTests {
 	@Test
 	public void insideDoorway2(){
 		
-		Set<BoardCell> testList = board.getAdjList(15, 16);
+		Set<BoardCell> testList = board.getAdjList(15, 14);
 		assertEquals(1, testList.size());
-		assertTrue(testList.contains(board.getCellAt(14, 16)));
+		assertTrue(testList.contains(board.getCellAt(14, 14)));
 		
 	}
 	
@@ -185,7 +185,7 @@ public class ClueBoardAdjTargetTests {
 
 		board.calcTargets(10, 6, 2);
 		targets=board.getTargets();
-		assertEquals(5, targets.size());
+		assertEquals(8, targets.size());
 		assertTrue(targets.contains(board.getCellAt(12, 6)));
 		assertTrue(targets.contains(board.getCellAt(8, 6)));
 		assertTrue(targets.contains(board.getCellAt(10, 4)));
@@ -198,23 +198,28 @@ public class ClueBoardAdjTargetTests {
 
 		board.calcTargets(13, 7, 3);
 		targets=board.getTargets();
-		assertEquals(11, targets.size());
-		assertTrue(targets.contains(board.getCellAt(10, 7)));
-		assertTrue(targets.contains(board.getCellAt(11, 6)));
-		assertTrue(targets.contains(board.getCellAt(12, 5)));
-		assertTrue(targets.contains(board.getCellAt(13, 4)));
-		assertTrue(targets.contains(board.getCellAt(14, 5)));
-		assertTrue(targets.contains(board.getCellAt(15, 6)));
-		assertTrue(targets.contains(board.getCellAt(16, 7)));
-		assertTrue(targets.contains(board.getCellAt(15, 8)));
-		assertTrue(targets.contains(board.getCellAt(14, 9)));
+		assertEquals(15, targets.size());
+		assertTrue(targets.contains(board.getCellAt(10, 7))); 
+		assertTrue(targets.contains(board.getCellAt(11, 6))); 
+		assertTrue(targets.contains(board.getCellAt(12, 5))); 
+		assertTrue(targets.contains(board.getCellAt(14, 5))); 
+		assertTrue(targets.contains(board.getCellAt(15, 6))); 
+		assertTrue(targets.contains(board.getCellAt(16, 7))); 
+		assertTrue(targets.contains(board.getCellAt(15, 8))); 
+		assertTrue(targets.contains(board.getCellAt(14, 9))); 
 		assertTrue(targets.contains(board.getCellAt(13, 10)));
-		assertTrue(targets.contains(board.getCellAt(11, 8)));
-
+		assertTrue(targets.contains(board.getCellAt(12, 7))); 
+		assertTrue(targets.contains(board.getCellAt(14, 7))); 
+		assertTrue(targets.contains(board.getCellAt(13, 6))); 
+		assertTrue(targets.contains(board.getCellAt(13, 8))); 
+		assertTrue(targets.contains(board.getCellAt(13, 5))); 
+		assertTrue(targets.contains(board.getCellAt(11, 8))); 
+		
 		board.calcTargets(0, 18, 4);
 		targets=board.getTargets();
 		assertEquals(1, targets.size());
 		assertTrue(targets.contains(board.getCellAt(4, 18)));
+		
 	}
 	
 	@Test
@@ -227,8 +232,10 @@ public class ClueBoardAdjTargetTests {
 		
 		board.calcTargets(15, 14, 2);
 		targets= board.getTargets();
-		assertEquals(1, targets.size());
-		assertTrue(targets.contains(board.getCellAt(14, 14)));
+		assertEquals(3, targets.size());
+		assertTrue(targets.contains(board.getCellAt(13, 14)));
+		assertTrue(targets.contains(board.getCellAt(14, 13)));
+		assertTrue(targets.contains(board.getCellAt(14, 15)));
 		
 	}
 	
@@ -238,6 +245,7 @@ public class ClueBoardAdjTargetTests {
 		board.calcTargets(5, 17, 1);
 		Set<BoardCell> targets = board.getTargets();
 		assertEquals(1, targets.size());
+		
 		assertTrue(targets.contains(board.getCellAt(6, 17)));
 		
 
@@ -245,7 +253,6 @@ public class ClueBoardAdjTargetTests {
 		targets = board.getTargets();
 		assertEquals(1, targets.size());
 		assertTrue(targets.contains(board.getCellAt(20,8)));
-		
 		
 		
 	}

@@ -38,7 +38,7 @@ public class IntBoardTests {
 	public void testAdjacencyLTC() {
 		
 		BoardCell cell = board.getCellAt(0, 0);
-		Set<BoardCell> testList = board.getAdjList(cell);
+		Set<BoardCell> testList = board.getAdjList(cell.getRow(),cell.getColumn());
 		assertTrue(testList.contains(board.getCellAt(1, 0)));
 		assertTrue(testList.contains(board.getCellAt(0, 1)));
 		assertEquals(2, testList.size());
@@ -49,7 +49,7 @@ public class IntBoardTests {
 	public void testAdjacencyRBC() {
 		
 		BoardCell cell = board.getCellAt(23, 22);
-		Set<BoardCell> testList = board.getAdjList(cell);
+		Set<BoardCell> testList = board.getAdjList(cell.getRow(),cell.getColumn());
 		assertTrue(testList.contains(board.getCellAt(23, 21)));
 		assertTrue(testList.contains(board.getCellAt(22, 22)));
 		assertEquals(2, testList.size());
@@ -62,7 +62,7 @@ public class IntBoardTests {
 	public void testAdjacencyCP() {
 
 		BoardCell cell = board.getCellAt(1, 1);
-		Set<BoardCell> testList = board.getAdjList(cell);
+		Set<BoardCell> testList = board.getAdjList(cell.getRow(),cell.getColumn());
 		assertTrue(testList.contains(board.getCellAt(0, 1)));
 		assertTrue(testList.contains(board.getCellAt(1, 0)));
 		assertTrue(testList.contains(board.getCellAt(1, 2)));
@@ -75,7 +75,7 @@ public class IntBoardTests {
 	public void testAdjacencyLE() {
 
 		BoardCell cell = board.getCellAt(2, 0);
-		Set<BoardCell> testList = board.getAdjList(cell);
+		Set<BoardCell> testList = board.getAdjList(cell.getRow(),cell.getColumn());
 		assertTrue(testList.contains(board.getCellAt(1, 0)));
 		assertTrue(testList.contains(board.getCellAt(2, 1)));
 		assertTrue(testList.contains(board.getCellAt(3, 0)));
@@ -87,7 +87,7 @@ public class IntBoardTests {
 	public void testAdjacencyRE() {
 		
 		BoardCell cell = board.getCellAt(2, 22);
-		Set<BoardCell> testList = board.getAdjList(cell);
+		Set<BoardCell> testList = board.getAdjList(cell.getRow(),cell.getColumn());
 		assertTrue(testList.contains(board.getCellAt(3, 22)));
 		assertTrue(testList.contains(board.getCellAt(1, 22)));
 		assertTrue(testList.contains(board.getCellAt(2, 21)));
@@ -110,7 +110,7 @@ public class IntBoardTests {
 		assertTrue(testList.contains(board.getCellAt(0, 2)));
 		assertTrue(testList.contains(board.getCellAt(2, 0)));
 		board.emptyTargetSets();*/
-		board.calcTargets(cell, 1);
+		board.calcTargets(cell.getRow(),cell.getColumn(), 1);
 		testList = board.getTargets();
 		assertTrue(testList.contains(board.getCellAt(0, 1)));
 		assertTrue(testList.contains(board.getCellAt(1, 0)));
@@ -131,7 +131,7 @@ public class IntBoardTests {
 		assertTrue(testList.contains(board.getCellAt(3, 1)));
 		assertTrue(testList.contains(board.getCellAt(3, 3)));
 		board.emptyTargetSets();*/
-		board.calcTargets(cell, 1);
+		board.calcTargets(cell.getRow(),cell.getColumn(), 1);
 		testList = board.getTargets();
 		assertTrue(testList.contains(board.getCellAt(1, 2)));
 		assertTrue(testList.contains(board.getCellAt(2, 1)));

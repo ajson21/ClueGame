@@ -27,7 +27,6 @@ public class CTest_BoardAdjTargetTests {
 		board.setConfigFiles("CTest_ClueLayout.csv", "CTest_ClueLegend.txt");		
 		// Initialize will load BOTH config files 
 		board.initialize();
-		System.out.println(board);
 		
 	}
 
@@ -179,7 +178,8 @@ public class CTest_BoardAdjTargetTests {
 	// These are LIGHT BLUE on the planning spreadsheet
 	@Test
 	public void testTargetsOneStep() {
-		board.calcTargets(21, 7, 1);
+		board.calcTargets(21, 7,
+				1);
 		Set<BoardCell> targets= board.getTargets();
 		assertEquals(2, targets.size());
 		assertTrue(targets.contains(board.getCellAt(20, 7)));

@@ -198,7 +198,7 @@ public class Board {
 					
 				}
 				
-				System.out.println(current.getRow() + " " + current.getColumn() + " " + currentSet.size());
+				//System.out.println(current.getRow() + " " + current.getColumn() + " " + currentSet.size());
 				
 				result.put(current,currentSet);
 				
@@ -223,6 +223,7 @@ public class Board {
 	public void calcTargets(int x, int y, int pathLength){
 		
 		emptyTargetSets();
+		visited.add(getCellAt(x,y));
 		recursiveCalcTargets(x, y, pathLength);
 		
 	}
@@ -239,33 +240,42 @@ public class Board {
 					
 					targets.add(adjCell);
 				
-				} else {
+				}else if(adjCell.isDoorway()){
 					
-					calcTargets(adjCell.getRow(),adjCell.getColumn(),pathLength--);
+					targets.add(adjCell);
 				
+				}else{
+					
+					recursiveCalcTargets(adjCell.getRow(),adjCell.getColumn(),pathLength - 1);
+					
 				}
+
+				visited.remove(adjCell);
 				
 			}
-			
-			visited.remove(adjCell);
-			
+
 		}
 		
 	}
 	
 	public void emptyTargetSets(){
+		
 		targets.clear();
 		visited.clear();
+		
 	}
 	
 	public Set<BoardCell> getTargets(){
-		
+	
 		return targets;
 		
 	}
+	
 	public void setConfigFiles(String x, String y){
+		
 		csv_file = x;
 		legend_file = y;
+		
 	}
 	
 	public Map<Character, String> getLegend(){
@@ -275,15 +285,21 @@ public class Board {
 	}
 	
 	public int getNumRows(){
+		
 		return grid.length;
+		
 	}
 
 	public int getNumColumns(){
+		
 		return grid[0].length;
+		
 	}
 
 	public BoardCell getCellAt(int i, int j) {
+		
 		return grid[i][j];
+		
 	}
 	
 	public boolean isRoom(int i, int j){
@@ -324,6 +340,7 @@ public class Board {
 		}
 		
 	}
+	
 /**
  * Ensures that the columns and rows are of consistent size, if a column is missing an element, something is wrong.
  * @throws BadConfigFormatException
