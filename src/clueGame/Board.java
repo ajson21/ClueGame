@@ -221,9 +221,6 @@ public class Board {
 
 				}
 
-				// System.out.println(current.getRow() + " " +
-				// current.getColumn() + " " + currentSet.size());
-
 				result.put(current, currentSet);
 
 			}
@@ -349,25 +346,32 @@ public class Board {
 	public void loadRoomConfig() throws BadConfigFormatException {
 
 		try {
+			
 			FileReader reader = new FileReader(legend_file);
 			Scanner in = new Scanner(reader);
 			in.useDelimiter(",");
 
 			while (in.hasNext()) {
+				
 				String input = in.nextLine();
 				String[] temp = input.split(", ");
 
 				if (temp[2].equalsIgnoreCase("Card") || temp[2].equalsIgnoreCase("Other")) {
 
 				} else {
+					
 					throw new BadConfigFormatException("Incorrect legend configuration");
+					
 				}
 
 				legend.put(temp[0].charAt(0), temp[1]);
+				
 			}
 
 		} catch (FileNotFoundException e) {
+			
 			e.printStackTrace();
+			
 		}
 
 	}
@@ -381,6 +385,7 @@ public class Board {
 	public void loadBoardConfig() throws BadConfigFormatException {
 
 		try {
+			
 			FileReader reader = new FileReader(csv_file);
 			Scanner in = new Scanner(reader);
 			ArrayList<String> input = new ArrayList<String>();
@@ -400,11 +405,17 @@ public class Board {
 				col_counter = sep.length;
 
 				if (row_counter == 0) {
+					
 					previous_col_elements = col_counter;
+					
 				} else {
+					
 					if (previous_col_elements != col_counter) {
+						
 						throw new BadConfigFormatException("Inconsisent column elements.");
+						
 					}
+					
 				}
 
 				row_counter++;
@@ -416,13 +427,17 @@ public class Board {
 					for (Character key : legend.keySet()) {
 
 						if (sep[i].charAt(0) == key) {
+							
 							existsInLegend = true;
+							
 						}
 
 					}
 
 					if (!existsInLegend) {
+						
 						throw new BadConfigFormatException("Detected room not in legend.");
+						
 					}
 
 					input.add(sep[i]);
@@ -432,11 +447,16 @@ public class Board {
 
 			grid = new BoardCell[row_counter][col_counter];
 			int counter = 0;
+			
 			for (int i = 0; i < row_counter; i++) {
+				
 				for (int j = 0; j < col_counter; j++) {
+					
 					grid[i][j] = new BoardCell(i, j, input.get(counter));
 					counter++;
+					
 				}
+				
 			}
 
 			adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
