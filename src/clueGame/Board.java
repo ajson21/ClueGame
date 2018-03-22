@@ -403,16 +403,16 @@ public class Board {
 
 		try {
 			
-			FileReader reader = new FileReader(legend_file);
-			Scanner in = new Scanner(reader);
-			in.useDelimiter(",");
+			FileReader fileReader = new FileReader(legend_file);
+			Scanner inputReader = new Scanner(fileReader);
+			inputReader.useDelimiter(",");
 
-			while (in.hasNext()) {
+			while (inputReader.hasNext()) {
 				
-				String input = in.nextLine();
-				String[] temp = input.split(", ");
+				String input = inputReader.nextLine();
+				String[] roomNames = input.split(", ");
 
-				if (temp[2].equalsIgnoreCase("Card") || temp[2].equalsIgnoreCase("Other")) {
+				if (roomNames[2].equalsIgnoreCase("Card") || roomNames[2].equalsIgnoreCase("Other")) {
 
 				} else {
 					
@@ -420,9 +420,11 @@ public class Board {
 					
 				}
 
-				legend.put(temp[0].charAt(0), temp[1]);
+				legend.put(roomNames[0].charAt(0), roomNames[1]);
 				
 			}
+			
+			inputReader.close();
 
 		} catch (FileNotFoundException e) {
 			
@@ -442,23 +444,23 @@ public class Board {
 
 		try {
 			
-			FileReader reader = new FileReader(csv_file);
-			Scanner in = new Scanner(reader);
+			FileReader fileReader = new FileReader(csv_file);
+			Scanner inputReader = new Scanner(fileReader);
 			ArrayList<String> input = new ArrayList<String>();
 
 			int previous_col_elements = 0;
 
-			in.useDelimiter(",");
+			inputReader.useDelimiter(",");
 
 			int col_counter = 0;
 			int row_counter = 0;
 
-			while (in.hasNext()) {
+			while (inputReader.hasNext()) {
 
-				String temp = in.nextLine();
-				String sep[] = temp.split(",");
+				String rowInput = inputReader.nextLine();
+				String roomInitials[] = rowInput.split(",");
 
-				col_counter = sep.length;
+				col_counter = roomInitials.length;
 
 				if (row_counter == 0) {
 					
@@ -476,13 +478,13 @@ public class Board {
 
 				row_counter++;
 
-				for (int i = 0; i < sep.length; i++) {
+				for (int i = 0; i < roomInitials.length; i++) {
 
 					boolean existsInLegend = false;
 
 					for (Character key : legend.keySet()) {
 
-						if (sep[i].charAt(0) == key) {
+						if (roomInitials[i].charAt(0) == key) {
 							
 							existsInLegend = true;
 							
@@ -496,7 +498,7 @@ public class Board {
 						
 					}
 
-					input.add(sep[i]);
+					input.add(roomInitials[i]);
 				}
 
 			}
