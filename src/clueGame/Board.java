@@ -68,6 +68,7 @@ public class Board {
 
 		HashMap<BoardCell, Set<BoardCell>> result = new HashMap<BoardCell, Set<BoardCell>>();
 
+		// Initial for loop for each grid, calculates adjacencies without walkway/room case. Handled later
 		for (int i = 0; i < grid.length; i++) {
 
 			for (int j = 0; j < grid[i].length; j++) {
@@ -94,9 +95,10 @@ public class Board {
 					}
 
 				}
-
+				
 				Set<BoardCell> toBeRemoved = new HashSet<BoardCell>();
 
+				// Code block to filter adjacency cases
 				for (BoardCell added : currentSet) {
 
 					boolean ableToAdd = false;
