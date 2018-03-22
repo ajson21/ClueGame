@@ -114,9 +114,9 @@ public class Board {
 
 							if (added.isDoorway()) {
 
-								DoorDirection temp = added.getDoorDirection();
+								DoorDirection addedDoorDirection = added.getDoorDirection();
 
-								switch (temp) {
+								switch (addedDoorDirection) {
 
 								case RIGHT:
 
@@ -168,9 +168,9 @@ public class Board {
 
 						if (current.isDoorway()) {
 
-							DoorDirection temp = current.getDoorDirection();
+							DoorDirection currentDoorDirection = current.getDoorDirection();
 
-							switch (temp) {
+							switch (currentDoorDirection) {
 
 							case RIGHT:
 								
@@ -428,7 +428,7 @@ public class Board {
 
 		} catch (FileNotFoundException e) {
 			
-			e.printStackTrace();
+			System.out.println("Detected legend file is not present in directory, please check that it is named correctly");
 			
 		}
 
