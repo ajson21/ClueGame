@@ -266,7 +266,8 @@ public class Board {
 	 */
 	public void calcTargets(int row, int column, int pathLength) {
 
-		emptyTargetSets();
+		targets.clear();
+		visited.clear();
 		visited.add(getCellAt(row, column));
 		recursiveCalcTargets(row, column, pathLength);
 
@@ -305,16 +306,6 @@ public class Board {
 			}
 
 		}
-
-	}
-
-	/**
-	 * Helper method to clear target and visited sets used in calculating targets
-	 */
-	public void emptyTargetSets() {
-
-		targets.clear();
-		visited.clear();
 
 	}
 
