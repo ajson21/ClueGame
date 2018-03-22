@@ -522,7 +522,7 @@ public class Board {
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Detected board file is not present in directory, please check that it is named correctly");
 		}
 
 	}
