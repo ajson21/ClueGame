@@ -6,12 +6,14 @@ package clueGame;
  *
  */
 public class BoardCell {
+	
 	private int row;
 	private int column;
 	private DoorDirection Direction;
 	private String initial;
 	
 	public BoardCell(int row, int column, String initial) {
+		
 		super();
 		this.row = row;
 		this.column = column;

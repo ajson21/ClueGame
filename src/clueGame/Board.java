@@ -1,22 +1,22 @@
-/**
- * 
- * @author ajson, jasonyu
- * Board class, currently a skeleton. 
- */
 package clueGame;
 
 import java.io.FileNotFoundException;
+
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
 import clueGame.BoardCell;
-
+/**
+ * Board Class, contains a grid of BoardCells to maintain board of the game
+ * Calculates adjacent cells for each board cell and calculates targets for possible movement
+ * @author Alan Son, Jason Yu
+ *
+ */
 public class Board {
 
 	private BoardCell[][] grid;
@@ -47,14 +47,23 @@ public class Board {
 	public void initialize() {
 
 		try {
+			
 			loadRoomConfig();
 			loadBoardConfig();
+			
 		} catch (BadConfigFormatException e) {
+			
 			System.out.println(e.getMessage());
+			
 		}
 
 	}
 
+	/**
+	 * Method for calculating adjacencies for each board cell in grid
+	 * Considers room/walkway/doorway adjacency cases
+	 * @return HashMap of BoardCell to Set containing all adjacencies
+	 */
 	public HashMap<BoardCell, Set<BoardCell>> calcAdjacencies() {
 
 		HashMap<BoardCell, Set<BoardCell>> result = new HashMap<BoardCell, Set<BoardCell>>();
@@ -231,6 +240,12 @@ public class Board {
 
 	}
 
+	/**
+	 * Getter for adjacency list given a cell
+	 * @param x Row of cell
+	 * @param y Column of cell
+	 * @return Set of adjacent cells
+	 */
 	public Set<BoardCell> getAdjList(int x, int y) {
 
 		Set<BoardCell> result = new HashSet<BoardCell>();
@@ -241,6 +256,12 @@ public class Board {
 
 	}
 
+	/**
+	 * Primary method for calculating targets. Makes subcall to a recursive function 
+	 * @param x Row of cell
+	 * @param y Column of cell
+	 * @param pathLength Initial number of moves left
+	 */
 	public void calcTargets(int x, int y, int pathLength) {
 
 		emptyTargetSets();
@@ -249,6 +270,12 @@ public class Board {
 
 	}
 
+	/**
+	 * Recursive method for calcTargets. 
+	 * @param x Row of cell
+	 * @param y Column of cell
+	 * @param pathLength Number of moves left to make
+	 */
 	public void recursiveCalcTargets(int x, int y, int pathLength) {
 
 		for (BoardCell adjCell : adjMtx.get(getCellAt(x, y))) {
@@ -279,6 +306,9 @@ public class Board {
 
 	}
 
+	/**
+	 * Helper method to clear target and visited sets used in calculating targets
+	 */
 	public void emptyTargetSets() {
 
 		targets.clear();
@@ -286,43 +316,76 @@ public class Board {
 
 	}
 
+	/**
+	 * Getter for possible targets, called after calculating targets
+	 * @return Returns target sets
+	 */
 	public Set<BoardCell> getTargets() {
 
 		return targets;
 
 	}
 
+	/**
+	 * Setter for input files
+	 * @param x Name of csv_file to be used 
+	 * @param y Name of legend_file to be used
+	 */
 	public void setConfigFiles(String x, String y) {
 
 		csv_file = x;
 		legend_file = y;
 
 	}
-
+	
+	/**
+	 * Basic getter for the legend map of the game, room type and initial stored in a map
+	 * @return Map containing initial to room name
+	 */
 	public Map<Character, String> getLegend() {
 
 		return legend;
 
 	}
 
+	/**
+	 * Basic getter for number of rows in grid
+	 * @return Number of rows in grid
+	 */
 	public int getNumRows() {
 
 		return grid.length;
 
 	}
 
+	/**
+	 * Basic getter for number of columns in grid
+	 * @return Number of columns based on first row
+	 */
 	public int getNumColumns() {
 
 		return grid[0].length;
 
 	}
 
+	/**
+	 * 
+	 * @param i Row of cell
+	 * @param j Column of cell
+	 * @return Returns BoardCell object at desired row and column
+	 */
 	public BoardCell getCellAt(int i, int j) {
 
 		return grid[i][j];
 
 	}
 
+	/**
+	 * 
+	 * @param i Row of cell
+	 * @param j Column of cell
+	 * @return Returns true if the selected board cell is a valid room, otherwise false if it is the closet or walkway
+	 */
 	public boolean isRoom(int i, int j) {
 		
 		char roomInitial = grid[i][j].getInitial();
