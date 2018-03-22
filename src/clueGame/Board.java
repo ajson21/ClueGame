@@ -321,13 +321,13 @@ public class Board {
 
 	/**
 	 * Setter for input files
-	 * @param x Name of csv_file to be used 
-	 * @param y Name of legend_file to be used
+	 * @param csv_file Name of csv_file to be used 
+	 * @param legend_file Name of legend_file to be used
 	 */
-	public void setConfigFiles(String x, String y) {
+	public void setConfigFiles(String csv_file, String legend_file) {
 
-		csv_file = x;
-		legend_file = y;
+		this.csv_file = csv_file;
+		this.legend_file = legend_file;
 
 	}
 	
@@ -363,25 +363,25 @@ public class Board {
 
 	/**
 	 * 
-	 * @param i Row of cell
-	 * @param j Column of cell
+	 * @param row Row of cell
+	 * @param column Column of cell
 	 * @return Returns BoardCell object at desired row and column
 	 */
-	public BoardCell getCellAt(int i, int j) {
+	public BoardCell getCellAt(int row, int column) {
 
-		return grid[i][j];
+		return grid[row][column];
 
 	}
 
 	/**
 	 * 
-	 * @param i Row of cell
-	 * @param j Column of cell
+	 * @param row Row of cell
+	 * @param column Column of cell
 	 * @return Returns true if the selected board cell is a valid room, otherwise false if it is the closet or walkway
 	 */
-	public boolean isRoom(int i, int j) {
+	public boolean isRoom(int row, int column) {
 		
-		char roomInitial = grid[i][j].getInitial();
+		char roomInitial = grid[row][column].getInitial();
 		
 		if (roomInitial == 'X' || roomInitial == 'W') {
 			
