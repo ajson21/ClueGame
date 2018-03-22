@@ -260,27 +260,27 @@ public class Board {
 
 	/**
 	 * Primary method for calculating targets. Makes subcall to a recursive function 
-	 * @param x Row of cell
-	 * @param y Column of cell
+	 * @param row Row of cell
+	 * @param column Column of cell
 	 * @param pathLength Initial number of moves left
 	 */
-	public void calcTargets(int x, int y, int pathLength) {
+	public void calcTargets(int row, int column, int pathLength) {
 
 		emptyTargetSets();
-		visited.add(getCellAt(x, y));
-		recursiveCalcTargets(x, y, pathLength);
+		visited.add(getCellAt(row, column));
+		recursiveCalcTargets(row, column, pathLength);
 
 	}
 
 	/**
 	 * Recursive method for calcTargets. 
-	 * @param x Row of cell
-	 * @param y Column of cell
+	 * @param row Row of cell
+	 * @param column Column of cell
 	 * @param pathLength Number of moves left to make
 	 */
-	public void recursiveCalcTargets(int x, int y, int pathLength) {
+	public void recursiveCalcTargets(int row, int column, int pathLength) {
 
-		for (BoardCell adjCell : adjMtx.get(getCellAt(x, y))) {
+		for (BoardCell adjCell : adjMtx.get(getCellAt(row, column))) {
 
 			if (!visited.contains(adjCell)) {
 
