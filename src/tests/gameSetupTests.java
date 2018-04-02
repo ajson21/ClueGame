@@ -90,13 +90,14 @@ public class gameSetupTests {
 		ArrayList<Card> roomDeck = board.getRoomDeck();
 		ArrayList<Card> weaponDeck = board.getWeaponDeck();
 		ArrayList<Card> playerDeck = board.getPlayerDeck();
+		ArrayList<Card> gameDeck = board.getGameDeck();
 		
 		assertEquals(solutionDeck.size(), 3);
-		assertEquals(roomDeck.size(), 10);
-		assertEquals(weaponDeck.size(), 6);
-		assertEquals(playerDeck, 6);
+		assertEquals(roomDeck.size(), 9);
+		assertEquals(weaponDeck.size(), 5);
+		assertEquals(playerDeck.size(), 5);
+		assertEquals(gameDeck.size(), 19);
 		
 	}
 
-	
 }

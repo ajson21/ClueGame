@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -37,6 +38,8 @@ public class Board {
 	private ArrayList<Card> roomDeck = new ArrayList<Card>();
 	private ArrayList<Card> playerDeck = new ArrayList<Card>();
 	private ArrayList<Card> weaponDeck = new ArrayList<Card>();
+	private ArrayList<Card> gameDeck = new ArrayList<Card>();
+
 
 	//
 	private Player[] playerList = new Player[6];
@@ -79,7 +82,59 @@ public class Board {
 		playerList[5] = new ComputerPlayer("Professor Plum", 12, 15, Color.MAGENTA);
 		
 		
+		// Loading weapons
+		weaponDeck.add(new Card("Candlestick", 0));
+		weaponDeck.add(new Card("Lead Pipe", 0));
+		weaponDeck.add(new Card("Knife", 0));
+		weaponDeck.add(new Card("Rope", 0));
+		weaponDeck.add(new Card("Revolver", 0));
+		weaponDeck.add(new Card("Wrench", 0));
+		
+		// Loading rooms
+		for(Character current : legend.keySet()){
 
+			if(legend.get(current).equalsIgnoreCase("Walkway") || legend.get(current).equalsIgnoreCase("Closet")){
+				
+			} else {
+
+				roomDeck.add(new Card(legend.get(current), 1)); 
+				
+			}
+			
+		}
+		
+		// Loading players
+		for(Player current : playerList){
+			
+			playerDeck.add(new Card(current.getName(), 2));
+			
+		}
+		
+		Random rand = new Random();
+		int weaponValue = rand.nextInt(weaponDeck.size());
+		int playerValue = rand.nextInt(playerDeck.size());
+		int roomValue = rand.nextInt(roomDeck.size());
+		
+		solutionDeck.add(weaponDeck.get(weaponValue));
+		solutionDeck.add(playerDeck.get(playerValue));
+		solutionDeck.add(roomDeck.get(roomValue));
+		
+		weaponDeck.remove(weaponValue);
+		playerDeck.remove(playerValue);
+		roomDeck.remove(roomValue);
+		
+		for(Card current: weaponDeck){
+			gameDeck.add(current);
+		}
+		
+		for(Card current: playerDeck){
+			gameDeck.add(current);
+		}
+		
+		for(Card current: roomDeck){
+			gameDeck.add(current);
+		}
+		
 	}
 
 	/**
@@ -581,6 +636,11 @@ public class Board {
 	public ArrayList<Card> getSolutionDeck() {
 		// TODO Auto-generated method stub
 		return solutionDeck;
+	}
+
+	public ArrayList<Card> getGameDeck() {
+		// TODO Auto-generated method stub
+		return gameDeck;
 	}
 
 }
