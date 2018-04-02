@@ -41,7 +41,7 @@ public class Board {
 	private ArrayList<Card> gameDeck = new ArrayList<Card>();
 
 
-	//
+	// Array of players, set to 6 total players
 	private Player[] playerList = new Player[6];
 	
 	
@@ -71,9 +71,20 @@ public class Board {
 			
 		}
 		
+		loadPlayers();
+		loadDecks();
+		
+		
+	}
+	
+	/**
+	 * Loads player information, preset with default values
+	 */
+	private void loadPlayers(){
+		
 		// Creating new human player
 		playerList[0] = new HumanPlayer("Mrs. Scarlet", 7, 9, Color.RED);
-		
+				
 		// Creating computer players
 		playerList[1] = new ComputerPlayer("Colonel Mustard", 7, 12, Color.YELLOW);
 		playerList[2] = new ComputerPlayer("Mrs. White", 7, 15, Color.WHITE);
@@ -81,7 +92,14 @@ public class Board {
 		playerList[4] = new ComputerPlayer("Mrs. Peacock", 12, 12, Color.BLUE);
 		playerList[5] = new ComputerPlayer("Professor Plum", 12, 15, Color.MAGENTA);
 		
-		
+	}
+	
+	/**
+	 * Loads different decks for usage in game
+	 * Initializes weapon, character, and room decks, then one from each is selected to be used in solution deck
+	 * Remaining are added to overall game deck
+	 */
+	private void loadDecks(){
 		// Loading weapons
 		weaponDeck.add(new Card("Candlestick", 0));
 		weaponDeck.add(new Card("Lead Pipe", 0));
@@ -89,50 +107,56 @@ public class Board {
 		weaponDeck.add(new Card("Rope", 0));
 		weaponDeck.add(new Card("Revolver", 0));
 		weaponDeck.add(new Card("Wrench", 0));
-		
+
 		// Loading rooms
 		for(Character current : legend.keySet()){
 
 			if(legend.get(current).equalsIgnoreCase("Walkway") || legend.get(current).equalsIgnoreCase("Closet")){
-				
+
 			} else {
 
 				roomDeck.add(new Card(legend.get(current), 1)); 
-				
+
 			}
-			
+
 		}
-		
+
 		// Loading players
 		for(Player current : playerList){
-			
+
 			playerDeck.add(new Card(current.getName(), 2));
-			
+
 		}
-		
+
 		Random rand = new Random();
 		int weaponValue = rand.nextInt(weaponDeck.size());
 		int playerValue = rand.nextInt(playerDeck.size());
 		int roomValue = rand.nextInt(roomDeck.size());
-		
+
 		solutionDeck.add(weaponDeck.get(weaponValue));
 		solutionDeck.add(playerDeck.get(playerValue));
 		solutionDeck.add(roomDeck.get(roomValue));
-		
+
 		weaponDeck.remove(weaponValue);
 		playerDeck.remove(playerValue);
 		roomDeck.remove(roomValue);
-		
+
 		for(Card current: weaponDeck){
+			
 			gameDeck.add(current);
+			
 		}
-		
+
 		for(Card current: playerDeck){
+			
 			gameDeck.add(current);
+			
 		}
-		
+
 		for(Card current: roomDeck){
+			
 			gameDeck.add(current);
+			
 		}
 		
 	}

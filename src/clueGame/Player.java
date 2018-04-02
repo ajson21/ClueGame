@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 public class Player {
 
@@ -8,6 +9,7 @@ public class Player {
 	private int row;
 	private int column;
 	private Color color;
+	private ArrayList<Card> playerDeck = new ArrayList<Card>();
 	
 	
 	public Player(String playerName, int row, int column, Color color) {
@@ -36,6 +38,11 @@ public class Player {
 	public Color getColor() {
 		// TODO Auto-generated method stub
 		return color;
+	}
+
+	public ArrayList<Card> getPlayerDeck() {
+		// TODO Auto-generated method stub
+		return playerDeck;
 	}
 
 }

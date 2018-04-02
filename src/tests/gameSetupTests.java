@@ -23,7 +23,9 @@ public class gameSetupTests {
 		board.setConfigFiles("ClueLayout.csv", "ClueLegend.txt");		
 		// Initialize will load BOTH config files 
 		board.initialize();
-		
+	
+		// NOTE
+		// Loading information and dealing cards is all handled in sub methods called in initialize
 	}
 	
 	
@@ -83,6 +85,10 @@ public class gameSetupTests {
 		
 	}
 
+	/**
+	 * Test for checking deck was created correctly
+	 * Checks for size of solution deck, card type decks, and overall game deck
+	 */
 	@Test
 	public void createDeck() {
 		
@@ -97,6 +103,26 @@ public class gameSetupTests {
 		assertEquals(weaponDeck.size(), 5);
 		assertEquals(playerDeck.size(), 5);
 		assertEquals(gameDeck.size(), 19);
+		
+	}
+	
+	/**
+	 * Test to check that cards have been dealt equally* to all players
+	 * Human player starts with 1 extra card due to unequal split in deck
+	 * Computer players start with 3 cards total
+	 */
+	@Test
+	public void dealDeck(){
+		
+
+		Player[] playerList = board.getPlayerList();
+		assertEquals(playerList[0].getPlayerDeck().size(), 4);
+		assertEquals(playerList[1].getPlayerDeck().size(), 3);
+		assertEquals(playerList[2].getPlayerDeck().size(), 3);
+		assertEquals(playerList[3].getPlayerDeck().size(), 3);
+		assertEquals(playerList[4].getPlayerDeck().size(), 3);
+		assertEquals(playerList[5].getPlayerDeck().size(), 3);
+		
 		
 	}
 
