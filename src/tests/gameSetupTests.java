@@ -44,10 +44,11 @@ public class gameSetupTests {
 		assertEquals(playerList[1].getRow(), 7);
 		assertEquals(playerList[1].getColumn(), 12);
 		assertEquals(playerList[1].getName(), "Colonel Mustard");
-		assertEquals(playerList[1].getColor().getRed(), 0);
+		assertEquals(playerList[1].getColor().getRed(), 255);
 		assertEquals(playerList[1].getColor().getGreen(), 255);
-		assertEquals(playerList[1].getColor().getBlue(), 255);
+		assertEquals(playerList[1].getColor().getBlue(), 0);
 
+		
 		
 		assertEquals(playerList[2].getRow(), 7);
 		assertEquals(playerList[2].getColumn(), 15);

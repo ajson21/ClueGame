@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Color;
 import java.io.FileNotFoundException;
 
 import java.io.FileReader;
@@ -66,6 +67,16 @@ public class Board {
 			System.out.println(e.getMessage());
 			
 		}
+		
+		// Creating new human player
+		playerList[0] = new HumanPlayer("Mrs. Scarlet", 7, 9, Color.RED);
+		
+		// Creating computer players
+		playerList[1] = new ComputerPlayer("Colonel Mustard", 7, 12, Color.YELLOW);
+		playerList[2] = new ComputerPlayer("Mrs. White", 7, 15, Color.WHITE);
+		playerList[3] = new ComputerPlayer("Mr. Green", 12, 9, Color.GREEN);
+		playerList[4] = new ComputerPlayer("Mrs. Peacock", 12, 12, Color.BLUE);
+		playerList[5] = new ComputerPlayer("Professor Plum", 12, 15, Color.MAGENTA);
 
 	}
 
