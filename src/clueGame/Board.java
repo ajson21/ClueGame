@@ -73,6 +73,7 @@ public class Board {
 		
 		loadPlayers();
 		loadDecks();
+		dealDecks();
 		
 		
 	}
@@ -161,6 +162,32 @@ public class Board {
 		
 	}
 
+	/**
+	 * Helper method to correctly deal all cards present in game deck to players equally
+	 * Game deck will be empty at end, information still retained in subdecks still present
+	 */
+	private void dealDecks(){
+		
+		int currentPlayerToDeal = 0;
+		
+		while(gameDeck.size() > 0){
+
+			if(currentPlayerToDeal == 6){
+				
+				currentPlayerToDeal = 0;
+				
+			}
+			
+			Random rand = new Random();
+			int cardIndexToDeal = rand.nextInt(gameDeck.size());
+			playerList[currentPlayerToDeal].addCard(gameDeck.get(cardIndexToDeal));
+			gameDeck.remove(cardIndexToDeal);
+			currentPlayerToDeal++;
+			
+		}
+		
+	}
+	
 	/**
 	 * Method for calculating adjacencies for each board cell in grid
 	 * Considers room/walkway/doorway adjacency cases

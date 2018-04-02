@@ -88,6 +88,8 @@ public class gameSetupTests {
 	/**
 	 * Test for checking deck was created correctly
 	 * Checks for size of solution deck, card type decks, and overall game deck
+	 * NOTE: due to implementation for dealing decks, game deck that used to hold all subdecks will be empty
+	 * Tested in deal decks
 	 */
 	@Test
 	public void createDeck() {
@@ -96,13 +98,11 @@ public class gameSetupTests {
 		ArrayList<Card> roomDeck = board.getRoomDeck();
 		ArrayList<Card> weaponDeck = board.getWeaponDeck();
 		ArrayList<Card> playerDeck = board.getPlayerDeck();
-		ArrayList<Card> gameDeck = board.getGameDeck();
 		
 		assertEquals(solutionDeck.size(), 3);
 		assertEquals(roomDeck.size(), 9);
 		assertEquals(weaponDeck.size(), 5);
 		assertEquals(playerDeck.size(), 5);
-		assertEquals(gameDeck.size(), 19);
 		
 	}
 	
@@ -110,11 +110,12 @@ public class gameSetupTests {
 	 * Test to check that cards have been dealt equally* to all players
 	 * Human player starts with 1 extra card due to unequal split in deck
 	 * Computer players start with 3 cards total
+	 * Check for gameDeck to be size 0 to ensure all cards have been dealt
+	 * Duplicate case has been handled in implementation, dealt cards are deleted from list
 	 */
 	@Test
 	public void dealDeck(){
 		
-
 		Player[] playerList = board.getPlayerList();
 		assertEquals(playerList[0].getPlayerDeck().size(), 4);
 		assertEquals(playerList[1].getPlayerDeck().size(), 3);
@@ -123,6 +124,9 @@ public class gameSetupTests {
 		assertEquals(playerList[4].getPlayerDeck().size(), 3);
 		assertEquals(playerList[5].getPlayerDeck().size(), 3);
 		
+		// Test to ensure all cards have been dealt
+		ArrayList<Card> gameDeck = board.getGameDeck();
+		assertEquals(gameDeck.size(), 0);
 		
 	}
 
