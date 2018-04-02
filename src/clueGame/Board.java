@@ -30,7 +30,17 @@ public class Board {
 	private Set<BoardCell> targets = new HashSet<BoardCell>();
 	private Set<BoardCell> visited = new HashSet<BoardCell>();
 	private Map<Character, String> legend = new HashMap<Character, String>();
+	
+	//Deck used by game, read in by initialize
+	private ArrayList<Card> gameDeck = new ArrayList<Card>();
+	private ArrayList<Card> roomDeck = new ArrayList<Card>();
+	private ArrayList<Card> playerDeck = new ArrayList<Card>();
+	private ArrayList<Card> weaponDeck = new ArrayList<Card>();
 
+	//
+	private Player[] playerList = new Player[6];
+	
+	
 	// constructor is private to ensure only one can be created
 	private Board() {
 	}
@@ -164,6 +174,14 @@ public class Board {
 
 						}
 
+					} else if (current.getInitial() == 'X') {
+						
+						if (added.getInitial() != 'X'){
+							
+							ableToAdd = true;
+							
+						}
+						
 					} else if (current.getInitial() != 'W') {
 
 						if (current.isDoorway()) {
@@ -214,7 +232,7 @@ public class Board {
 
 							}
 
-						}
+						} 
 
 					}
 
@@ -525,6 +543,11 @@ public class Board {
 			System.out.println("Detected board file is not present in directory, please check that it is named correctly");
 		}
 
+	}
+
+	public Player[] getPlayerList() {
+		// TODO Auto-generated method stub
+		return playerList;
 	}
 
 }
