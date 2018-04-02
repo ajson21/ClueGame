@@ -2,10 +2,13 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import clueGame.Board;
+import clueGame.Card;
 import clueGame.Player;
 
 public class gameSetupTests {
@@ -80,4 +83,20 @@ public class gameSetupTests {
 		
 	}
 
+	@Test
+	public void createDeck() {
+		
+		ArrayList<Card> solutionDeck = board.getSolutionDeck();
+		ArrayList<Card> roomDeck = board.getRoomDeck();
+		ArrayList<Card> weaponDeck = board.getWeaponDeck();
+		ArrayList<Card> playerDeck = board.getPlayerDeck();
+		
+		assertEquals(solutionDeck.size(), 3);
+		assertEquals(roomDeck.size(), 10);
+		assertEquals(weaponDeck.size(), 6);
+		assertEquals(playerDeck, 6);
+		
+	}
+
+	
 }

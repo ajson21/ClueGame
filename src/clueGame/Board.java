@@ -33,7 +33,7 @@ public class Board {
 	private Map<Character, String> legend = new HashMap<Character, String>();
 	
 	//Deck used by game, read in by initialize
-	private ArrayList<Card> gameDeck = new ArrayList<Card>();
+	private ArrayList<Card> solutionDeck = new ArrayList<Card>();
 	private ArrayList<Card> roomDeck = new ArrayList<Card>();
 	private ArrayList<Card> playerDeck = new ArrayList<Card>();
 	private ArrayList<Card> weaponDeck = new ArrayList<Card>();
@@ -77,6 +77,8 @@ public class Board {
 		playerList[3] = new ComputerPlayer("Mr. Green", 12, 9, Color.GREEN);
 		playerList[4] = new ComputerPlayer("Mrs. Peacock", 12, 12, Color.BLUE);
 		playerList[5] = new ComputerPlayer("Professor Plum", 12, 15, Color.MAGENTA);
+		
+		
 
 	}
 
@@ -559,6 +561,26 @@ public class Board {
 	public Player[] getPlayerList() {
 		// TODO Auto-generated method stub
 		return playerList;
+	}
+
+	public ArrayList<Card> getPlayerDeck() {
+		// TODO Auto-generated method stub
+		return playerDeck;
+	}
+	
+	public ArrayList<Card> getWeaponDeck() {
+		// TODO Auto-generated method stub
+		return weaponDeck;
+	}
+	
+	public ArrayList<Card> getRoomDeck() {
+		// TODO Auto-generated method stub
+		return roomDeck;
+	}
+	
+	public ArrayList<Card> getSolutionDeck() {
+		// TODO Auto-generated method stub
+		return solutionDeck;
 	}
 
 }
