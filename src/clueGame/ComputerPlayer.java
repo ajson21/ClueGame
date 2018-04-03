@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.util.Set;
 
 public class ComputerPlayer extends Player{
 
@@ -9,5 +10,10 @@ public class ComputerPlayer extends Player{
 		// TODO Auto-generated constructor stub
 	}
 
+	public Set<BoardCell> selectTargets(Set<BoardCell> targets){
+		
+		return targets;
+		
+	}
 	
 }
