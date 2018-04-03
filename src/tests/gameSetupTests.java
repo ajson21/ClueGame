@@ -3,6 +3,8 @@ package tests;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -123,6 +125,16 @@ public class gameSetupTests {
 		assertEquals(playerList[3].getPlayerDeck().size(), 3);
 		assertEquals(playerList[4].getPlayerDeck().size(), 3);
 		assertEquals(playerList[5].getPlayerDeck().size(), 3);
+		
+		Set<Card> deckSet = new HashSet<Card>();
+		for(int player = 0; player < 6; player++){
+			for(int card = 0; card < playerList[player].getPlayerDeck().size(); card++){
+				deckSet.add(playerList[player].getPlayerDeck().get(card));
+			}
+		}
+		
+		assertEquals(deckSet.size(), 19);
+		
 		
 		// Test to ensure all cards have been dealt
 		ArrayList<Card> gameDeck = board.getGameDeck();
