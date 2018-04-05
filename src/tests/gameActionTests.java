@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.*;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Set;
 
 import org.junit.BeforeClass;
@@ -12,6 +13,7 @@ import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.ComputerPlayer;
 import clueGame.Player;
+import clueGame.Card;
 
 public class gameActionTests {
 	
@@ -97,13 +99,31 @@ public class gameActionTests {
 	
 	@Test
 	public void checkAccusation() {
-		fail("Not yet implemented");
+
+		ComputerPlayer tester = new ComputerPlayer("Tester", 6, 17, Color.RED, board.getLegend());
+		board.clearSolution();
+		Card weapon = new Card("Wrench", 0);
+		Card room = new Card("Hotbox", 1);
+		Card person = new Card("Tester", 2);
+		board.addSolution(weapon, room, person);
+		
+		ArrayList<String> accusation = tester.makeAccusation();
+		assertEquals(board.checkAccusation(accusation),true);
+		
+		tester.giveAccusation();
+		accusation = tester.makeAccusation();
+		assertEquals(board.checkAccusation(accusation),false);
+		
+		tester.giveAccusation();
+		accusation = tester.makeAccusation();
+		assertEquals(board.checkAccusation(accusation),false);
+
+		tester.giveAccusation();
+		accusation = tester.makeAccusation();
+		assertEquals(board.checkAccusation(accusation),false);
+		
 	}
 	
-	@Test
-	public void disproveAccusation() {
-		fail("Not yet implemented");
-	}
 	
 	@Test
 	public void handleSuggestion() {

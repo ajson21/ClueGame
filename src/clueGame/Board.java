@@ -694,4 +694,24 @@ public class Board {
 		return gameDeck;
 	}
 
+	public void clearSolution() {
+		// TODO Auto-generated method stub
+		solutionDeck.clear();
+		
+	}
+
+	public void addSolution(Card weapon, Card room, Card person) {
+		// TODO Auto-generated method stub
+		solutionDeck.add(weapon);
+		solutionDeck.add(room);
+		solutionDeck.add(person);
+		
+	}
+
+	public boolean checkAccusation(ArrayList<String> accusation) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
 }

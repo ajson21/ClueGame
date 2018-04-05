@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -79,6 +80,17 @@ public class ComputerPlayer extends Player{
 	public Set<Character> getVisitedRooms() {
 		// TODO Auto-generated method stub
 		return visitedRooms;
+	}
+
+	public ArrayList<String> makeAccusation() {
+		// TODO Auto-generated method stub
+		return null;
+		
+	}
+
+	public void giveAccusation() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
