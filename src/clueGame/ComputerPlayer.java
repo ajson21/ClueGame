@@ -25,7 +25,6 @@ public class ComputerPlayer extends Player{
 				
 			}
 			
-			
 		}
 		
 	}
@@ -89,7 +88,12 @@ public class ComputerPlayer extends Player{
 	 */
 	public ArrayList<Card> makeAccusation() {
 		// TODO Auto-generated method stub
-		return unknownCardDeck;
+		ArrayList<Card> accusation = new ArrayList<Card>();
+		accusation.add(unknownWeaponDeck.get(0));
+		accusation.add(unknownPersonDeck.get(0));
+		accusation.add(unknownRoomDeck.get(0));
+		
+		return accusation;
 		
 	}
 
@@ -101,11 +105,38 @@ public class ComputerPlayer extends Player{
 	 */
 	public void giveAccusation(Card weapon, Card room, Card person) {
 		// TODO Auto-generated method stub
-		unknownCardDeck.clear();
-		unknownCardDeck.add(weapon);
-		unknownCardDeck.add(room);
-		unknownCardDeck.add(person);
+		unknownWeaponDeck.clear();
+		unknownPersonDeck.clear();
+		unknownRoomDeck.clear();
+		unknownWeaponDeck.add(weapon);
+		unknownRoomDeck.add(room);
+		unknownPersonDeck.add(person);
 		
+	}
+
+	/**
+	 * Helper method for testing functionality of suggestions
+	 * @param weapon
+	 * @param room
+	 * @param person
+	 */
+	public void giveSuggestion(Card weapon, Card room, Card person) {
+		// TODO Auto-generated method stub
+		if(!unknownWeaponDeck.contains(weapon)){
+			unknownWeaponDeck.add(weapon);
+		}
+		if(!unknownRoomDeck.contains(room)){
+			unknownRoomDeck.add(room);
+		}
+		if(!unknownPersonDeck.contains(person)){
+			unknownPersonDeck.add(person);
+		}
+		
+	}
+
+	public ArrayList<Card> createSuggestion() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

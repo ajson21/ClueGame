@@ -136,22 +136,32 @@ public class Board {
 		int roomValue = rand.nextInt(roomDeck.size());
 
 		solutionDeck.add(weaponDeck.get(weaponValue));
+		
+		for(Player current : playerList){
+			
+			current.addToUnknownWeapon(weaponDeck.get(weaponValue));
+			
+		}
+		
 		solutionDeck.add(playerDeck.get(playerValue));
+		
+		for(Player current : playerList){
+			
+			current.addToUnknownPerson(playerDeck.get(playerValue));
+			
+		}
+		
 		solutionDeck.add(roomDeck.get(roomValue));
+		
+		for(Player current : playerList){
+			
+			current.addToUnknownRoom(roomDeck.get(roomValue));
+			
+		}
 
 		weaponDeck.remove(weaponValue);
 		playerDeck.remove(playerValue);
 		roomDeck.remove(roomValue);
-		
-		for(Card card : solutionDeck){
-			
-			for(Player current : playerList){
-				
-				current.addToUnknown(card);
-				
-			}
-			
-		}
 
 		for(Card card: weaponDeck){
 			
@@ -159,7 +169,7 @@ public class Board {
 			
 			for(Player current : playerList){
 				
-				current.addToUnknown(card);
+				current.addToUnknownWeapon(card);
 				
 			}
 		}
@@ -170,7 +180,7 @@ public class Board {
 			
 			for(Player current : playerList){
 				
-				current.addToUnknown(card);
+				current.addToUnknownPerson(card);
 				
 			}
 			
@@ -182,7 +192,7 @@ public class Board {
 			
 			for(Player current : playerList){
 				
-				current.addToUnknown(card);
+				current.addToUnknownRoom(card);
 				
 			}
 			

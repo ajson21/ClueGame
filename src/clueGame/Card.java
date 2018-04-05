@@ -3,20 +3,20 @@ package clueGame;
 public class Card {
 
 	private String cardName;
-	private Enum Type;
+	private Enum type;
 	
 	public Card(String cardName, int cardType){
 		this.cardName = cardName;
 		switch (cardType){
 			
 			case 0:
-				Type = CardType.WEAPON;
+				type = CardType.WEAPON;
 				break;
 			case 1:
-				Type = CardType.ROOM;
+				type = CardType.ROOM;
 				break;
 			case 2:
-				Type = CardType.PERSON;
+				type = CardType.PERSON;
 				break;
 		}
 		
@@ -24,6 +24,11 @@ public class Card {
 	
 	public boolean equals(){
 		return false;
+	}
+
+	public Enum getType() {
+		// TODO Auto-generated method stub
+		return type;
 	}
 	
 }

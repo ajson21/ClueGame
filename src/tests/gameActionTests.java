@@ -97,6 +97,11 @@ public class gameActionTests {
 		
 	}
 	
+	/**
+	 * Test that checks if accusations are made correctly, cards given by player are handled and compared in board
+	 * Helper methods only used for this test were created
+	 * Design is to compare memory of cards instead of simply names
+	 */
 	@Test
 	public void checkAccusation() {
 
@@ -130,13 +135,40 @@ public class gameActionTests {
 	
 	
 	@Test
-	public void handleSuggestion() {
-		fail("Not yet implemented");
+	public void createSuggestion() {
+		
+		ComputerPlayer tester = new ComputerPlayer("Tester", 8, 4, Color.RED, board.getLegend());
+		Card Weapon = new Card("Wrench", 0);
+		Card Room = new Card("Hotbox", 1);
+		Card Person = new Card("Tester", 2);
+
+		tester.giveSuggestion(Weapon,Room,Person);
+		ArrayList<Card> suggestion = tester.createSuggestion();
+		assertEquals(suggestion.size(), 0);
+		
+		tester.giveSuggestion(Weapon,Room,Person);
+		suggestion = tester.createSuggestion();
+		assertEquals(suggestion.contains(Weapon), true);
+		assertEquals(suggestion.contains(Room), true);
+		assertEquals(suggestion.contains(Person), true);
+		
+		Card ExtraWeapon = new Card("Knife", 0);
+		Card ExtraPerson = new Card("Tester1", 2);
+		tester.giveSuggestion(Weapon, Room, ExtraPerson);
+		tester.giveSuggestion(ExtraWeapon, Room, Person);
+	
+		suggestion = tester.createSuggestion();
+		assertEquals(suggestion.size(), 3);
+		
 	}
 	
 	@Test
-	public void createSuggestion() {
+	public void disproveSuggestion() {
 		fail("Not yet implemented");
 	}
 
+	@Test
+	public void handleSuggestion() {
+		fail("Not yet implemented");
+	}
 }
