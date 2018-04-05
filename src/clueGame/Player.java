@@ -14,7 +14,9 @@ public class Player {
 	private int row;
 	private int column;
 	private Color color;
-	private ArrayList<Card> playerDeck = new ArrayList<Card>();
+	protected ArrayList<Card> playerDeck = new ArrayList<Card>();
+	protected ArrayList<Card> unknownCardDeck = new ArrayList<Card>();
+	protected ArrayList<Card> knownCardDeck = new ArrayList<Card>();
 	
 	/**
 	 * 
@@ -29,6 +31,7 @@ public class Player {
 		this.row = row;
 		this.column = column;
 		this.color = color;
+		
 	}
 
 	/**
@@ -62,6 +65,12 @@ public class Player {
 	public ArrayList<Card> getPlayerDeck() {
 		// TODO Auto-generated method stub
 		return playerDeck;
+	}
+
+	public void addToUnknown(Card card) {
+		// TODO Auto-generated method stub
+		unknownCardDeck.add(card);
+		
 	}
 
 }

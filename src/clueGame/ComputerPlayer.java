@@ -82,14 +82,29 @@ public class ComputerPlayer extends Player{
 		return visitedRooms;
 	}
 
-	public ArrayList<String> makeAccusation() {
+	/**
+	 * Method called when computer player only has 3 cards left to guess
+	 * Will change later to more meaningful decision making
+	 * @return unknownCardDeck with cards 
+	 */
+	public ArrayList<Card> makeAccusation() {
 		// TODO Auto-generated method stub
-		return null;
+		return unknownCardDeck;
 		
 	}
 
-	public void giveAccusation() {
+	/**
+	 * Helper method for testing functionality of accusations
+	 * @param weapon
+	 * @param room
+	 * @param person
+	 */
+	public void giveAccusation(Card weapon, Card room, Card person) {
 		// TODO Auto-generated method stub
+		unknownCardDeck.clear();
+		unknownCardDeck.add(weapon);
+		unknownCardDeck.add(room);
+		unknownCardDeck.add(person);
 		
 	}
 	

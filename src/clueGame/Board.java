@@ -128,6 +128,7 @@ public class Board {
 			playerDeck.add(new Card(current.getName(), 2));
 
 		}
+		
 
 		Random rand = new Random();
 		int weaponValue = rand.nextInt(weaponDeck.size());
@@ -141,22 +142,49 @@ public class Board {
 		weaponDeck.remove(weaponValue);
 		playerDeck.remove(playerValue);
 		roomDeck.remove(roomValue);
-
-		for(Card current: weaponDeck){
+		
+		for(Card card : solutionDeck){
 			
-			gameDeck.add(current);
-			
-		}
-
-		for(Card current: playerDeck){
-			
-			gameDeck.add(current);
+			for(Player current : playerList){
+				
+				current.addToUnknown(card);
+				
+			}
 			
 		}
 
-		for(Card current: roomDeck){
+		for(Card card: weaponDeck){
 			
-			gameDeck.add(current);
+			gameDeck.add(card);
+			
+			for(Player current : playerList){
+				
+				current.addToUnknown(card);
+				
+			}
+		}
+
+		for(Card card: playerDeck){
+			
+			gameDeck.add(card);
+			
+			for(Player current : playerList){
+				
+				current.addToUnknown(card);
+				
+			}
+			
+		}
+
+		for(Card card: roomDeck){
+			
+			gameDeck.add(card);
+			
+			for(Player current : playerList){
+				
+				current.addToUnknown(card);
+				
+			}
 			
 		}
 		
@@ -694,12 +722,21 @@ public class Board {
 		return gameDeck;
 	}
 
+	/**
+	 * Helper method for testing functionality of accusations
+	 */
 	public void clearSolution() {
 		// TODO Auto-generated method stub
 		solutionDeck.clear();
 		
 	}
 
+	/**
+	 * Helper method for testing functionality of accusations
+	 * @param weapon
+	 * @param room
+	 * @param person
+	 */
 	public void addSolution(Card weapon, Card room, Card person) {
 		// TODO Auto-generated method stub
 		solutionDeck.add(weapon);
@@ -708,9 +745,26 @@ public class Board {
 		
 	}
 
-	public boolean checkAccusation(ArrayList<String> accusation) {
+	/**
+	 * Method to check if the accusation given by a player is correct according to the solution deck
+	 * @param accusation Arraylist of cards given by a player
+	 * @return True if the accusation arraylist matches the solution arraylist
+	 */
+	public boolean checkAccusation(ArrayList<Card> accusation) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean correct = true;
+		
+		for(Card card : accusation){
+			
+			if(!solutionDeck.contains(card)){
+				
+				return false;
+				
+			} 
+			
+		}
+		
+		return correct;
 	}
 
 

@@ -107,18 +107,22 @@ public class gameActionTests {
 		Card person = new Card("Tester", 2);
 		board.addSolution(weapon, room, person);
 		
-		ArrayList<String> accusation = tester.makeAccusation();
+		tester.giveAccusation(weapon,room,person);
+		ArrayList<Card> accusation = tester.makeAccusation();
 		assertEquals(board.checkAccusation(accusation),true);
 		
-		tester.giveAccusation();
+		Card wrongWeapon = new Card("Knife", 0);
+		tester.giveAccusation(wrongWeapon,room,person);
 		accusation = tester.makeAccusation();
 		assertEquals(board.checkAccusation(accusation),false);
 		
-		tester.giveAccusation();
+		Card wrongRoom = new Card("Dungeon", 1);
+		tester.giveAccusation(weapon, wrongRoom, person);
 		accusation = tester.makeAccusation();
 		assertEquals(board.checkAccusation(accusation),false);
 
-		tester.giveAccusation();
+		Card wrongPerson = new Card("tester", 2);
+		tester.giveAccusation(weapon, room, wrongPerson);
 		accusation = tester.makeAccusation();
 		assertEquals(board.checkAccusation(accusation),false);
 		
