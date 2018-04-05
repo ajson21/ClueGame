@@ -63,6 +63,13 @@ public class ComputerPlayer extends Player{
 				
 			}
 			
+			for(BoardCell target: targets){
+				
+				unvisitedRooms.remove(target.getInitial());
+				visitedRooms.add(target.getInitial());
+				
+			}
+			
 		}
 		
 		return targets;
