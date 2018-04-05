@@ -54,7 +54,7 @@ public class gameActionTests {
 	@Test
 	public void selectUnvisitedTargetComputer(){
 		
-		ComputerPlayer tester = new ComputerPlayer("Tester", 8, 17, Color.RED, board.getLegend());
+		ComputerPlayer tester = new ComputerPlayer("Tester", 6, 17, Color.RED, board.getLegend());
 		board.calcTargets(6, 17, 1);
 		Set<BoardCell> targets= board.getTargets();
 		targets = tester.selectTargets(targets);
@@ -74,10 +74,24 @@ public class gameActionTests {
 		
 	}
 	
+	/**
+	 * Test to check that a previously visited room will be included in movement possibilities.
+	 * Runs an initial target selection to add a room to visitedRooms list.
+	 * Checks that visitedRooms has size of 1, then room is considered in target selection along with walkways.
+	 */
 	@Test 
 	public void selectVisitedTargetComputer(){
 		
+		ComputerPlayer tester = new ComputerPlayer("Tester", 6, 17, Color.RED, board.getLegend());
+		board.calcTargets(6, 17, 1);
+		Set<BoardCell> targets= board.getTargets();
+		targets = tester.selectTargets(targets);
+		assertEquals(targets.size(), 1);
 		
+		assertEquals(tester.getVisitedRooms().size(), 1);
+		board.calcTargets(6, 17, 1);
+		targets=tester.selectTargets(targets);
+		assertEquals(targets.size(), 4);
 		
 	}
 	

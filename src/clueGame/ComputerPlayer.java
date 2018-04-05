@@ -68,5 +68,10 @@ public class ComputerPlayer extends Player{
 		return targets;
 		
 	}
+
+	public Set<Character> getVisitedRooms() {
+		// TODO Auto-generated method stub
+		return visitedRooms;
+	}
 	
 }
