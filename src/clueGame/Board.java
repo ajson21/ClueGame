@@ -87,11 +87,11 @@ public class Board {
 		playerList[0] = new HumanPlayer("Mrs. Scarlet", 7, 9, Color.RED);
 				
 		// Creating computer players
-		playerList[1] = new ComputerPlayer("Colonel Mustard", 7, 12, Color.YELLOW);
-		playerList[2] = new ComputerPlayer("Mrs. White", 7, 15, Color.WHITE);
-		playerList[3] = new ComputerPlayer("Mr. Green", 12, 9, Color.GREEN);
-		playerList[4] = new ComputerPlayer("Mrs. Peacock", 12, 12, Color.BLUE);
-		playerList[5] = new ComputerPlayer("Professor Plum", 12, 15, Color.MAGENTA);
+		playerList[1] = new ComputerPlayer("Colonel Mustard", 7, 12, Color.YELLOW, legend);
+		playerList[2] = new ComputerPlayer("Mrs. White", 7, 15, Color.WHITE, legend);
+		playerList[3] = new ComputerPlayer("Mr. Green", 12, 9, Color.GREEN, legend);
+		playerList[4] = new ComputerPlayer("Mrs. Peacock", 12, 12, Color.BLUE, legend);
+		playerList[5] = new ComputerPlayer("Professor Plum", 12, 15, Color.MAGENTA, legend);
 		
 	}
 	

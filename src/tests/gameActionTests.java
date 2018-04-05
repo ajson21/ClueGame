@@ -34,7 +34,7 @@ public class gameActionTests {
 	@Test
 	public void selectTargetComputer() {
 
-		ComputerPlayer tester = new ComputerPlayer("Tester", 8, 17, Color.RED);
+		ComputerPlayer tester = new ComputerPlayer("Tester", 8, 17, Color.RED, board.getLegend());
 		board.calcTargets(8, 17, 1);
 		Set<BoardCell> targets= board.getTargets();
 		targets = tester.selectTargets(targets);
@@ -54,7 +54,7 @@ public class gameActionTests {
 	@Test
 	public void selectUnvisitedTargetComputer(){
 		
-		ComputerPlayer tester = new ComputerPlayer("Tester", 8, 17, Color.RED);
+		ComputerPlayer tester = new ComputerPlayer("Tester", 8, 17, Color.RED, board.getLegend());
 		board.calcTargets(6, 17, 1);
 		Set<BoardCell> targets= board.getTargets();
 		targets = tester.selectTargets(targets);
@@ -67,7 +67,7 @@ public class gameActionTests {
 		assertEquals(targets.size(), 1);
 		
 
-		board.calcTargets(16, 18, 1);
+		board.calcTargets(15, 18, 2);
 		targets= board.getTargets();
 		targets = tester.selectTargets(targets);
 		assertEquals(targets.size(), 2);
