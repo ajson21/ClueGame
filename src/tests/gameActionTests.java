@@ -133,7 +133,12 @@ public class gameActionTests {
 		
 	}
 	
-	
+	/**
+	 * Test method that checks if suggestions have been made correctly
+	 * Tests for if the player suggests the room, which is handled in implementation
+	 * Checks if suggestion correctly selects cards for suggestions, with unknown cards being either size 1 or >1 for each card type
+	 * Handled in implementation
+	 */
 	@Test
 	public void createSuggestion() {
 		
@@ -159,9 +164,70 @@ public class gameActionTests {
 		
 	}
 	
+	/**
+	 * 
+	 */
 	@Test
 	public void disproveSuggestion() {
-		fail("Not yet implemented");
+		
+		ComputerPlayer tester = new ComputerPlayer("Tester", 7, 4, Color.RED, board.getLegend());
+		Card Weapon = new Card("Wrench", 0);
+		Card Room = new Card("Hotbox", 1);
+		Card Person = new Card("Tester", 2);
+		Card falseWeapon = new Card("Knife", 0);
+		Card falseRoom = new Card("Dungeon", 1);
+		Card falsePerson = new Card("Fake Tester", 2);
+		
+		
+		tester.createPlayerDeck(Weapon, Room, Person);
+		ArrayList<Card> suggestion = new ArrayList<Card>();
+		suggestion.add(falseWeapon);
+		suggestion.add(falseRoom);
+		suggestion.add(Person);
+
+		Card suggestionResult;
+		suggestionResult = tester.disproveSuggestion(suggestion);
+		assertEquals(suggestionResult, Person);
+		
+		//
+		suggestion.clear();
+		suggestion.add(falseWeapon);
+		suggestion.add(Room);
+		suggestion.add(Person);
+		
+		int roomCounter = 0;
+		int personCounter = 0;
+		
+		for(int i = 0; i < 100; i++){
+			
+			suggestionResult = tester.disproveSuggestion(suggestion);
+			
+			if(suggestionResult == Room){
+				
+				roomCounter++;
+				
+			}
+			
+			if(suggestionResult == Person){
+				
+				personCounter++;
+				
+			}
+			
+		}
+		
+		assert(personCounter > 10);
+		assert(roomCounter > 10);
+		
+		suggestion.clear();
+		suggestion.add(falseWeapon);
+		suggestion.add(falseRoom);
+		suggestion.add(falsePerson);
+		
+		suggestionResult = tester.disproveSuggestion(suggestion);
+		assertEquals(suggestionResult,null);
+		
+		
 	}
 
 	@Test

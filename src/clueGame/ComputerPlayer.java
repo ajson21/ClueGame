@@ -193,4 +193,27 @@ public class ComputerPlayer extends Player{
 		
 	}
 	
+	public Card disproveSuggestion(ArrayList<Card> suggestion) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	/**
+	 * Helper method only used in testing
+	 * Gives computer player exactly three cards that are known
+	 * @param weapon
+	 * @param room
+	 * @param person
+	 */
+	public void createPlayerDeck(Card weapon, Card room, Card person) {
+		// TODO Auto-generated method stub
+		playerDeck.clear();
+		playerDeck.add(weapon);
+		playerDeck.add(room);
+		playerDeck.add(person);
+		
+	}
+
+	
+	
 }
