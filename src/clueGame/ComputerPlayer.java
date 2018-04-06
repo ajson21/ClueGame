@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 public class ComputerPlayer extends Player{
@@ -134,9 +135,62 @@ public class ComputerPlayer extends Player{
 		
 	}
 
-	public ArrayList<Card> createSuggestion() {
+	public ArrayList<Card> createSuggestion(Character initial) {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Card> suggestion = new ArrayList<Card>();
+		boolean foundRoom = false;
+		Card currentRoom = new Card("Temporary", 1);
+		
+		for(Card card : unknownRoomDeck){
+			if(initial == card.getCardName().charAt(0)){
+			
+				foundRoom = true;
+				currentRoom = card;
+				break;
+				
+			}
+			
+		}
+		
+		for(Card card : knownCardDeck){
+			if(initial == card.getCardName().charAt(0)){
+			
+				foundRoom = true;
+				currentRoom = card;
+				break;
+				
+			}
+			
+		}
+		
+		suggestion.add(currentRoom);
+		
+		Random rand = new Random();
+		
+		if(unknownWeaponDeck.size() == 1){
+			
+			suggestion.add(unknownWeaponDeck.get(0));
+			
+		}else{
+			
+			int weaponValue = rand.nextInt(unknownWeaponDeck.size());
+			suggestion.add(unknownWeaponDeck.get(weaponValue));
+			
+		}
+		
+		if(unknownPersonDeck.size() == 1){
+			
+			suggestion.add(unknownPersonDeck.get(0));
+			
+		}else{
+			
+			int personValue = rand.nextInt(unknownPersonDeck.size());
+			suggestion.add(unknownPersonDeck.get(personValue));
+			
+		}
+		
+		return suggestion;
+		
 	}
 	
 }

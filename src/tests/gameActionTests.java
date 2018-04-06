@@ -137,17 +137,14 @@ public class gameActionTests {
 	@Test
 	public void createSuggestion() {
 		
-		ComputerPlayer tester = new ComputerPlayer("Tester", 8, 4, Color.RED, board.getLegend());
+		ComputerPlayer tester = new ComputerPlayer("Tester", 7, 4, Color.RED, board.getLegend());
 		Card Weapon = new Card("Wrench", 0);
 		Card Room = new Card("Hotbox", 1);
 		Card Person = new Card("Tester", 2);
 
 		tester.giveSuggestion(Weapon,Room,Person);
-		ArrayList<Card> suggestion = tester.createSuggestion();
-		assertEquals(suggestion.size(), 0);
-		
-		tester.giveSuggestion(Weapon,Room,Person);
-		suggestion = tester.createSuggestion();
+		ArrayList<Card> suggestion = tester.createSuggestion(board.getCellAt(tester.getRow(),tester.getColumn()).getInitial());
+		assertEquals(suggestion.size(), 3);
 		assertEquals(suggestion.contains(Weapon), true);
 		assertEquals(suggestion.contains(Room), true);
 		assertEquals(suggestion.contains(Person), true);
@@ -157,7 +154,7 @@ public class gameActionTests {
 		tester.giveSuggestion(Weapon, Room, ExtraPerson);
 		tester.giveSuggestion(ExtraWeapon, Room, Person);
 	
-		suggestion = tester.createSuggestion();
+		suggestion = tester.createSuggestion(board.getCellAt(tester.getRow(),tester.getColumn()).getInitial());
 		assertEquals(suggestion.size(), 3);
 		
 	}

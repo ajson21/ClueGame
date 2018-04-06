@@ -30,5 +30,10 @@ public class Card {
 		// TODO Auto-generated method stub
 		return type;
 	}
+
+	public String getCardName() {
+		// TODO Auto-generated method stub
+		return cardName;
+	}
 	
 }
