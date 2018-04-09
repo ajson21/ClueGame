@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Set;
 
 import org.junit.BeforeClass;
@@ -165,7 +166,10 @@ public class gameActionTests {
 	}
 	
 	/**
-	 * 
+	 * Test method for checking if disproveSuggestion is correctly implemented
+	 * Checks if only one card is present in hand then player will return that card
+	 * If multiple cards are present, randomly returns one
+	 * Otherwise, returns null object if card is not present
 	 */
 	@Test
 	public void disproveSuggestion() {
@@ -225,13 +229,46 @@ public class gameActionTests {
 		suggestion.add(falsePerson);
 		
 		suggestionResult = tester.disproveSuggestion(suggestion);
-		assertEquals(suggestionResult,null);
+		assertEquals(suggestionResult, null);
 		
 		
 	}
 
 	@Test
 	public void handleSuggestion() {
-		fail("Not yet implemented");
+		
+		
+		int nullCounter = 0;
+		int cardCounter = 0;
+		
+		for(int i = 0; i < 100; i++){
+			
+			board.initialize();
+			
+			Random rand = new Random();
+			
+			int playerCounter = rand.nextInt(board.getPlayerList().length - 1) + 1;
+			
+			ArrayList<Card> suggestion = new ArrayList<Card>();
+			suggestion = board.getPlayerList()[1].createSuggestion('H');
+			
+			Card answer = board.handleSuggestion(suggestion, playerCounter);
+			
+			if(answer == null){
+				
+				nullCounter++;
+				
+			}else{
+				
+				cardCounter++;
+				
+			}
+			
+		}
+		
+		assert(nullCounter > 20);
+		assert(cardCounter > 20);
+		
 	}
+
 }

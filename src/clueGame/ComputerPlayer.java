@@ -135,6 +135,7 @@ public class ComputerPlayer extends Player{
 		
 	}
 
+	@Override
 	public ArrayList<Card> createSuggestion(Character initial) {
 		// TODO Auto-generated method stub
 		ArrayList<Card> suggestion = new ArrayList<Card>();
@@ -193,36 +194,7 @@ public class ComputerPlayer extends Player{
 		
 	}
 	
-	public Card disproveSuggestion(ArrayList<Card> suggestion) {
-		// TODO Auto-generated method stub
-		int cardCounter = 0;
-		ArrayList<Card> correctCards = new ArrayList<Card>();
-		
-		for(Card suggestionCard : suggestion){
-			
-			for(Card playerCard : playerDeck){
-				
-				if(suggestionCard == playerCard){
-					
-					cardCounter++;
-					correctCards.add(suggestionCard);
-					
-				}
-				
-			}
-			
-		}
-		
-		if(cardCounter != 0){
-			
-			Random rand = new Random();
-			return correctCards.get(rand.nextInt(correctCards.size()));
-			
-		}
-		
-		return null;
-		
-	}
+
 	
 	/**
 	 * Helper method only used in testing

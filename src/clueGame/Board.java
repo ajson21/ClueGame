@@ -75,7 +75,6 @@ public class Board {
 		loadDecks();
 		dealDecks();
 		
-		
 	}
 	
 	/**
@@ -775,6 +774,12 @@ public class Board {
 		}
 		
 		return correct;
+		
+	}
+
+	public Card handleSuggestion(ArrayList<Card> suggestion, int playerCounter) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
