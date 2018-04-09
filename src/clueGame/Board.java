@@ -777,10 +777,62 @@ public class Board {
 		
 	}
 
+	/**
+	 * Handles suggestion given as arraylist of cards by player
+	 * Returns null if accusing player, which is initial player, has answer
+	 * Returns null if no players can answer
+	 * Returns answer if player has card, and returns first answer found
+	 * @param suggestion ArrayList of cards that player must disprove if possible
+	 * @param playerCounter Variable representing accusing player
+	 * @return Card that disproves suggestion
+	 */
 	public Card handleSuggestion(ArrayList<Card> suggestion, int playerCounter) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		boolean checkingCards = true;
+		int initialPlayer = playerCounter;
+		Card answer = null;
+		if(playerCounter == playerList.length - 1){
+			
+			playerCounter = 0;
+			
+		} else {
+			
+			playerCounter++;
+			
+		}
+		
+		while(checkingCards){
+			
+			if(initialPlayer == playerCounter){
+				
+				checkingCards = false;
+				
+			} else{
+				
+				answer = playerList[playerCounter].disproveSuggestion(suggestion);
+						
+				if (answer != null){
+					
+					checkingCards = false;
+					
+				}
+				
+				if(playerCounter == playerList.length - 1){
+					
+					playerCounter = 0;
+					
+				}
+				
+				
+				playerCounter++;
+				
+			}
+			
+		}
+		
+		return answer;
+		
 	}
-
 
 }

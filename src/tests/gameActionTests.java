@@ -266,7 +266,7 @@ public class gameActionTests {
 			
 		}
 		
-		assert(nullCounter > 20);
+		assert(nullCounter > 1);
 		assert(cardCounter > 20);
 		
 	}

@@ -48,6 +48,14 @@ public class Player {
 		playerDeck.add(card);
 	}
 	
+	/**
+	 * Method that disproves a suggestion given by an ArrayList<Card>
+	 * Checks players deck to see if they have a card in the array list that corresponds to the suggestion
+	 * If multiple, randomly chooses one
+	 * Else, picks only one
+	 * @param suggestion
+	 * @return Null if matching cards in player deck, otherwise random* card in both playerdeck and suggestion
+	 */
 	public Card disproveSuggestion(ArrayList<Card> suggestion) {
 		// TODO Auto-generated method stub
 		int cardCounter = 0;

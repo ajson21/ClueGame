@@ -30,6 +30,12 @@ public class ComputerPlayer extends Player{
 		
 	}
 
+	/**
+	 * Target method for computer players that selects targets based on rooms visited
+	 * Unvisited rooms are given priority, while unvisited rooms are considered same as walkways
+	 * @param targets
+	 * @return Set<BoardCell> valid targets
+	 */
 	public Set<BoardCell> selectTargets(Set<BoardCell> targets){
 		
 		boolean filter = false;
@@ -135,6 +141,10 @@ public class ComputerPlayer extends Player{
 		
 	}
 
+	/**
+	 * Method that creates a suggestion for a computer player
+	 * Considers unknown cards of each type and picks one from each
+	 */
 	@Override
 	public ArrayList<Card> createSuggestion(Character initial) {
 		// TODO Auto-generated method stub
