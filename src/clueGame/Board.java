@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.io.FileNotFoundException;
 
 import java.io.FileReader;
@@ -12,6 +13,8 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JPanel;
+
 import clueGame.BoardCell;
 /**
  * Board Class, contains a grid of BoardCells to maintain board of the game
@@ -19,7 +22,7 @@ import clueGame.BoardCell;
  * @author Alan Son, Jason Yu
  *
  */
-public class Board {
+public class Board extends JPanel{
 
 	private BoardCell[][] grid;
 	// variable used for singleton pattern
@@ -673,6 +676,7 @@ public class Board {
 					}
 
 					input.add(roomInitials[i]);
+					
 				}
 
 			}
@@ -832,6 +836,55 @@ public class Board {
 		}
 		
 		return answer;
+		
+	}
+	
+	@Override
+	public void paintComponent(Graphics g){
+		
+		super.paintComponent(g);
+		
+		for(int row = 0; row < grid.length; row++){
+			
+			for(int column = 0; column < grid[row].length; column++){
+				
+				grid[row][column].draw(g, column, row, false, false, false, 0, legend);
+				
+			}
+			
+		}
+		
+		for(int row = 0; row < grid.length; row++){
+			
+			for(int column = 0; column < grid[row].length; column++){
+				
+				grid[row][column].draw(g, column, row, true, false, false, 0, legend);
+				
+			}
+			
+		}
+		
+		for(int row = 0; row < grid.length; row++){
+			
+			for(int column = 0; column < grid[row].length; column++){
+				
+				grid[row][column].draw(g, column, row, true, true, false, 0, legend);
+				
+			}
+			
+		}
+		
+		for(int player = 0; player < playerList.length; player++){
+			
+			grid[playerList[player].getRow()][playerList[player].getColumn()].draw(g, playerList[player].getColumn(), playerList[player].getRow(), false, false, true, player, legend);
+			
+		}
+		
+		g.setColor(Color.BLACK);
+		g.drawLine(13*25, 0*25, 13*25, 5*25);
+		
+		
+		
 		
 	}
 

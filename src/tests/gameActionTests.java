@@ -234,6 +234,12 @@ public class gameActionTests {
 		
 	}
 
+	/**
+	 * Test to check that handling suggestions are done correctly
+	 * Randomly creates a suggestion from a computer player, with a hard coded room
+	 * Holds counters for if the answer for the handleSuggestion is null or is a card
+	 * Implementation details of handleSuggestion in comment block above handleSuggestion method
+	 */
 	@Test
 	public void handleSuggestion() {
 		
