@@ -2,6 +2,8 @@ package clueGame;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -9,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -73,6 +76,16 @@ public class ControlPanelGUI extends JPanel {
 		
 	}
 	
+	public static class detectiveNotesListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			DetectiveNotes notes = new DetectiveNotes();
+			notes.displayGUI();
+			
+		}
+		
+	}
+	
+	
 	public static void main(String[] args) {
 		
 		JFrame frame= new JFrame();
@@ -90,6 +103,9 @@ public class ControlPanelGUI extends JPanel {
 		fileMenu.add(notesItem);
 		
 		menuBar.add(fileMenu);
+		
+		notesItem.addActionListener(new detectiveNotesListener());
+		
 		
 		frame.setJMenuBar(menuBar);
 
@@ -109,5 +125,7 @@ public class ControlPanelGUI extends JPanel {
 		
 		
 	}
+	
+	
 
 }
