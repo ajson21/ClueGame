@@ -88,6 +88,7 @@ public class ControlPanelGUI extends JPanel {
 	
 	public static void main(String[] args) {
 		
+		
 		JFrame frame= new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Clue");
@@ -109,7 +110,7 @@ public class ControlPanelGUI extends JPanel {
 		
 		frame.setJMenuBar(menuBar);
 
-		frame.setSize(1000, 800);
+		frame.setSize(850, 850);
 		
 		ControlPanelGUI gui = new ControlPanelGUI();
 		frame.add(gui, BorderLayout.SOUTH);
@@ -119,9 +120,15 @@ public class ControlPanelGUI extends JPanel {
 		board.setConfigFiles("ClueLayout.csv", "ClueLegend.txt");		
 		board.initialize();
 		
+		CardGUI cardGUI = new CardGUI();
+		frame.add(cardGUI, BorderLayout.EAST);
+		
 		frame.add(board, BorderLayout.CENTER);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+
+		JOptionPane.showMessageDialog(null, "You are Miss Scarlett. Press Next Player to begin game.", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE); 
 		
 		
 	}

@@ -883,9 +883,6 @@ public class Board extends JPanel{
 		g.setColor(Color.BLACK);
 		g.drawLine(13*25, 0*25, 13*25, 5*25);
 		
-		
-		
-		
 	}
 
 }
