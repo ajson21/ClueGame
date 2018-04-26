@@ -42,7 +42,7 @@ public class gameSetupTests {
 		Player[] playerList = board.getPlayerList();
 		assertEquals(playerList[0].getRow(), 7);
 		assertEquals(playerList[0].getColumn(), 9);
-		assertEquals(playerList[0].getName(), "Mrs. Scarlet");
+		assertEquals(playerList[0].getName(), "Ms. Scarlett");
 		assertEquals(playerList[0].getColor().getRed(), 255);
 		assertEquals(playerList[0].getColor().getGreen(), 0);
 		assertEquals(playerList[0].getColor().getBlue(), 0);

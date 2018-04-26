@@ -8,6 +8,7 @@ import clueGame.CardType;
 import clueGame.Card;
 
 /**
+ * Base class for representing a player.
  * 
  * @author ajson, jasonyu
  *
@@ -134,5 +135,50 @@ public class Player {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public void setLocation(int row, int column){
+		this.row = row;
+		this.column = column;
+		
+	}
+	
+	public void returnSuggestion(Card card){
+		if(unknownWeaponDeck.contains(card)){
+			
+			unknownWeaponDeck.remove(card);
+			knownCardDeck.add(card);
+			
+		}else if(unknownPersonDeck.contains(card)){
+			
+			unknownPersonDeck.remove(card);
+			knownCardDeck.add(card);
+			
+		}else{
+			
+			unknownRoomDeck.remove(card);
+			knownCardDeck.add(card);
+			
+		}
+		
+		
+	}
 
+	public ArrayList<Card> getUnknownRoomDeck() {
+		return unknownRoomDeck;
+	}
+
+	public ArrayList<Card> getUnknownWeaponDeck() {
+		return unknownWeaponDeck;
+	}
+
+	public ArrayList<Card> getUnknownPersonDeck() {
+		return unknownPersonDeck;
+	}
+
+	public ArrayList<Card> getKnownCardDeck() {
+		// TODO Auto-generated method stub
+		return knownCardDeck;
+	}
+	
+	
 }

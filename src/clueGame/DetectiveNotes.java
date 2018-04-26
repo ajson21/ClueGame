@@ -3,6 +3,13 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
+/**
+ * 
+ * GUI class to display detective notes. Contains checks and panels for each option in clue.
+ * 
+ * @author jasonyu
+ *
+ */
 public class DetectiveNotes
 {
     private JPanel topPanel, centerPanel, bottomPanel;

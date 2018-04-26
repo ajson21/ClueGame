@@ -2,7 +2,13 @@ package clueGame;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Map;
+import java.util.Random;
 
 import javax.swing.JPanel;
 
@@ -13,7 +19,7 @@ import javax.swing.JPanel;
  * @author Alan Son, Jason Yu
  *
  */
-public class BoardCell extends JPanel {
+public class BoardCell extends JPanel{
 
 	private int row;
 	private int column;
@@ -34,6 +40,7 @@ public class BoardCell extends JPanel {
 	public BoardCell(int row, int column, String initial) {
 
 		super();
+		
 		this.row = row;
 		this.column = column;
 		this.initial = initial;
@@ -135,6 +142,29 @@ public class BoardCell extends JPanel {
 
 	}
 
+	public void drawTarget(Graphics g, int row, int column){
+		
+		int multiplier = 25;
+		g.setColor(Color.PINK);
+		g.fillRect(row*multiplier, column*multiplier, multiplier, multiplier);
+		
+		
+	}
+	
+	/**
+	 * Method to draw each BoardCell with the current graphics object.
+	 * Cases for both walkways and rooms.
+	 * Also draws borders between rooms correctly.
+	 * 
+	 * @param g Graphics object shared by board
+	 * @param row Row of BoardCell to be drawn
+	 * @param column Column of BoardCell to be drawn
+	 * @param walkway Switch if BoardCell is a walkway
+	 * @param name Switch if the BoardCell to be drawn needs to display room name
+	 * @param player Switch if the BoardCell to be drawn contains a player
+	 * @param playerNumber Color codes players
+	 * @param legend Names of rooms
+	 */
 	public void draw(Graphics g, int row, int column, boolean walkway, boolean name, boolean player, int playerNumber, Map<Character, String> legend) {
 		
 		int multiplier = 25;
@@ -200,6 +230,8 @@ public class BoardCell extends JPanel {
 
 					switch (Direction) {
 
+					// Code block for drawing doorways. 
+					
 					case UP:
 
 						g.setColor(Color.BLUE);
@@ -309,5 +341,5 @@ public class BoardCell extends JPanel {
 		}
 
 	}
-
+	
 }

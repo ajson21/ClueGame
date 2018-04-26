@@ -7,6 +7,13 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+/**
+ * Class to represent an AI player.
+ * Automated methods for gameplay decisions.
+ * 
+ * @author ajson, jasonyu
+ *
+ */
 public class ComputerPlayer extends Player{
 	
 	Set<Character> visitedRooms = new HashSet<Character>();
@@ -149,13 +156,11 @@ public class ComputerPlayer extends Player{
 	public ArrayList<Card> createSuggestion(Character initial) {
 		// TODO Auto-generated method stub
 		ArrayList<Card> suggestion = new ArrayList<Card>();
-		boolean foundRoom = false;
 		Card currentRoom = new Card("Temporary", 1);
 		
 		for(Card card : unknownRoomDeck){
 			if(initial == card.getCardName().charAt(0)){
 			
-				foundRoom = true;
 				currentRoom = card;
 				break;
 				
@@ -166,7 +171,6 @@ public class ComputerPlayer extends Player{
 		for(Card card : knownCardDeck){
 			if(initial == card.getCardName().charAt(0)){
 			
-				foundRoom = true;
 				currentRoom = card;
 				break;
 				
@@ -222,6 +226,18 @@ public class ComputerPlayer extends Player{
 		
 	}
 
-	
+	/**
+	 * Checks if the computer player is able to make an accusation, check used in other part of Clue
+	 */
+	public boolean ableToMakeAccusation() {
+		// TODO Auto-generated method stub
+		if(unknownPersonDeck.size() == 1 && unknownWeaponDeck.size() == 1 && unknownRoomDeck.size() == 1){
+			
+			return true;
+			
+		}
+		
+		return false;
+	}
 	
 }

@@ -10,6 +10,13 @@ import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+/**
+ * 
+ * JPanel for displaying the Cards of the player
+ * 
+ * @author ajson, jasonyu
+ *
+ */
 public class CardGUI extends JPanel{
 	
 public CardGUI(){
@@ -21,7 +28,8 @@ public CardGUI(){
 	
 	private JPanel createCardGUI() {
 		// TODO Auto-generated method stubJPanel turnPanel = new JPanel();
-		
+		Board board;
+		board = Board.getInstance();
 		
 		JPanel cardPanel = new JPanel();
 		cardPanel.setPreferredSize(new Dimension(200, 600));
@@ -56,6 +64,39 @@ public CardGUI(){
 		cardPanel.add(peoplePanel);
 		cardPanel.add(roomPanel);
 		cardPanel.add(weaponPanel);
+		
+		String roomText = "";
+		String personText = "";
+		String weaponText = "";
+		
+		for(Card card : board.getPlayerList()[0].getPlayerDeck()){
+			
+			switch(card.getType()){
+			
+				case WEAPON:
+					weaponText += card.getCardName();
+					weaponText += "\n";
+					break;
+				case PERSON:
+					personText += card.getCardName();
+					personText += "\n";
+					break;
+				case ROOM:
+					roomText += card.getCardName();
+					roomText += "\n";
+					break;
+			}
+			
+		}
+		
+		roomText.split("\\r?\\n");
+		personText.split("\\r?\\n");
+		weaponText.split("\\r?\\n");
+		
+		roomCards.setText(roomText);
+		personCards.setText(personText);
+		weaponCards.setText(weaponText);
+		
 		return cardPanel;
 	}
 

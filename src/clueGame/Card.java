@@ -1,9 +1,15 @@
 package clueGame;
 
+/**
+ * Card class, represents a card used in Clue. Has a type and name
+ * 
+ * @author ajson, jasonyu
+ *
+ */
 public class Card {
 
 	private String cardName;
-	private Enum type;
+	private CardType type;
 	
 	public Card(String cardName, int cardType){
 		this.cardName = cardName;
@@ -22,11 +28,7 @@ public class Card {
 		
 	}
 	
-	public boolean equals(){
-		return false;
-	}
-
-	public Enum getType() {
+	public CardType getType() {
 		// TODO Auto-generated method stub
 		return type;
 	}
