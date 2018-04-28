@@ -5,6 +5,12 @@
  */
 package clueGame;
 
+/**
+ * Custom exception used for checking if a bad file was used for configuration
+ * 
+ * @author ajson, jasonyu
+ *
+ */
 public class BadConfigFormatException extends RuntimeException{
 	
 	public BadConfigFormatException(){

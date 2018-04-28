@@ -11,7 +11,7 @@ import javax.swing.border.*;
 import java.awt.event.ActionListener;
 
 /**
- * Generic cancel button used in suggestion box 
+ * Generic cancel button used in suggestion box and accusation box
  * 
  * @author ajson, jasonyu
  * 
@@ -24,6 +24,7 @@ public class CancelButton implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		HumanSuggestionGUI.mainFrame.dispose();
+		HumanAccusationGUI.mainFrame.dispose();
 
 	}
 

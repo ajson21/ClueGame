@@ -30,8 +30,8 @@ public class HumanSuggestionGUI
     private JLabel r = new JLabel("Your room");
     private JLabel w = new JLabel("Weapon");
     private JTextField rr = new JTextField();
-    private JComboBox cbox1, cbox3;
-    private String[] people = {"Miss Scarlett", "Colonel Mustard", "Mr. Green", "Mrs. White", "Mrs. Peacock", "Professor Plum"};
+    private static JComboBox cbox1, cbox3;
+    private String[] people = {"Ms. Scarlett", "Colonel Mustard", "Mr. Green", "Mrs. White", "Mrs. Peacock", "Professor Plum"};
     private String[] weapons = {"Revolver", "Knife", "Pipe", "Wrench", "Rope", "Candlestick"};
 
     public static JFrame mainFrame = new JFrame("Make a Guess");
@@ -105,23 +105,158 @@ public class HumanSuggestionGUI
         contentPane.add(topPanel, BorderLayout.PAGE_START);
         contentPane.add(centerPanel, BorderLayout.CENTER);
         contentPane.add(bottomPanel,BorderLayout.PAGE_END);
-        weaponSelected = cbox1.getSelectedItem().toString();
-        personSelected = cbox3.getSelectedItem().toString();
         mainFrame.setContentPane(contentPane);
         mainFrame.pack();
         mainFrame.setLocationByPlatform(true);
         mainFrame.setVisible(true);
         
-    	submit.addActionListener(new SubmitButton());
+    	submit.addActionListener(new SuggestionSubmitButton());
     	cancel.addActionListener(new CancelButton());
     	
     }
     
     public static ArrayList<String> getAnswers(){
+        weaponSelected = cbox1.getSelectedItem().toString();
+        personSelected = cbox3.getSelectedItem().toString();
     	ArrayList<String> result = new ArrayList<String>();
-    	result.add("0" + personSelected);
-    	result.add("1" + weaponSelected);
+    	result.add(personSelected);
+    	result.add(weaponSelected);
     	return result;
     }
+    
+
+/**
+ * Submit button used for human suggestion.
+ * Contains logic for correctly suggesting cards based on human input.
+ * 
+ * @author ajson, jasonyu
+ *
+ */
+public class SuggestionSubmitButton implements ActionListener {
+	SuggestionSubmitButton() {
+
+	}
+
+	public void actionPerformed(ActionEvent e) {
+
+		Board board;
+		board = Board.getInstance();
+
+		ArrayList<String> suggestions = HumanSuggestionGUI.getAnswers();
+
+		if (board.getCurrentPlayer() == 1) {
+
+			Card roomSuggestion = null;
+			Card weaponSuggestion = null;
+			Card personSuggestion = null;
+			
+			String result1 = "";
+			String result2 = "";
+			
+			result1 = suggestions.get(0);
+			result2 = suggestions.get(1);
+			
+			Character roomInitial = board.getGrid()[board.getPlayerList()[0].getRow()][board.getPlayerList()[0].getColumn()].getInitial();
+
+			for (Card card : board.getPlayerList()[0].getUnknownRoomDeck()) {
+				if (roomInitial == card.getCardName().charAt(0)) {
+
+					roomSuggestion = card;
+					break;
+
+				}
+
+			}
+			
+			for (Card card : board.getPlayerList()[0].getUnknownWeaponDeck()){
+				if (result1.equalsIgnoreCase(card.getCardName())) {
+
+					weaponSuggestion = card;
+					break;
+
+				}else if(result2.equalsIgnoreCase(card.getCardName())){
+					
+					weaponSuggestion = card;
+					break;
+					
+				}
+				
+			}
+			
+			for (Card card : board.getPlayerList()[0].getUnknownPersonDeck()){
+				if (result1.equalsIgnoreCase(card.getCardName())) {
+
+					personSuggestion = card;
+					break;
+
+				} else if(result2.equalsIgnoreCase(card.getCardName())){
+					
+					personSuggestion = card;
+					break;
+					
+				}
+				
+			}
+
+			for (Card card : board.getPlayerList()[0].getKnownCardDeck()) {
+				if (roomInitial == card.getCardName().charAt(0)) {
+
+					roomSuggestion = card;
+
+				}
+				
+				if (result1.equalsIgnoreCase(card.getCardName()) || result2.equalsIgnoreCase(card.getCardName())) {
+
+					personSuggestion = card;
+
+				}
+				
+				if (result1.equalsIgnoreCase(card.getCardName()) || result2.equalsIgnoreCase(card.getCardName())) {
+
+					weaponSuggestion = card;
+
+				}
+
+			}
+			
+			
+			ArrayList<Card> suggestion = new ArrayList<Card>();
+			
+			suggestion.add(personSuggestion);
+			suggestion.add(roomSuggestion);
+			suggestion.add(weaponSuggestion);
+			
+			Card result = board.handleSuggestion(suggestion, 0);
+			
+			String guess = "";
+			
+			guess += roomSuggestion.getCardName();
+			guess += " ";
+			guess += personSuggestion.getCardName();
+			guess += " ";
+			guess += weaponSuggestion.getCardName();
+			guess += " ";
+
+			ControlPanelGUI.guessBox.setText(guess);
+			
+			if(result == null){
+				
+				ControlPanelGUI.guessResultBox.setText("No new clue");
+				
+			}else{
+				
+				ControlPanelGUI.guessResultBox.setText(result.getCardName());
+				board.getPlayerList()[0].returnSuggestion(result);
+				
+			}
+			
+		}
+		
+		HumanSuggestionGUI.mainFrame.dispose();
+
+	}
+
+}
+
     
 }

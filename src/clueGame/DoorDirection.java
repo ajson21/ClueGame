@@ -5,6 +5,12 @@
  */
 package clueGame;
 
+/**
+ * Custon enum to declare door direction
+ * 
+ * @author ajson
+ *
+ */
 public enum DoorDirection {
 	
 	UP, DOWN, LEFT, RIGHT, NONE;

@@ -25,8 +25,8 @@ import javax.swing.border.TitledBorder;
 
 /**
  * 
- * JPanel for the Control Panel of clue.
- * Also contains logic for changing players due to inclusion of nextPlayerButton
+ * JPanel for the Control Panel of clue. Also contains logic for changing
+ * players due to inclusion of nextPlayerButton
  * 
  * @author ajson, jasonyu
  *
@@ -110,10 +110,12 @@ public class ControlPanelGUI extends JPanel {
 		}
 
 	}
+	
+	
 
 	/**
-	 * AccusationButtonListener contains logic for making accusations.
-	 * Only for human player
+	 * AccusationButtonListener contains logic for making accusations. Only for
+	 * human player
 	 * 
 	 * @author ajson
 	 *
@@ -127,6 +129,11 @@ public class ControlPanelGUI extends JPanel {
 			if (board.getCurrentPlayer() == 0) {
 
 				nextPlayerButton.setEnabled(true);
+				
+				
+				new HumanAccusationGUI().displayGUI(); 
+				
+				
 
 				board.repaint();
 				board.incrementPlayer();
@@ -188,19 +195,38 @@ public class ControlPanelGUI extends JPanel {
 				if (current.ableToMakeAccusation()) {
 
 					ArrayList<Card> accusation = current.makeAccusation();
+
+					Card roomCard = null;
+					Card personCard = null;
+					Card weaponCard = null;
+
+					for (Card card : accusation) {
+						switch (card.getType()) {
+
+						case WEAPON:
+							weaponCard = card;
+							break;
+						case PERSON:
+							personCard = card;
+							break;
+						case ROOM:
+							roomCard = card;
+							break;
+							
+						}
+					}
+
 					boolean correct = board.checkAccusation(accusation);
 
 					madeAccusation = true;
 
 					if (correct) {
 
-						
-
-						// ADD IMPLEMENTATION AND DISPLAY
+						new ComputerCorrectAccusation().displayGUI();
 
 					} else {
 
-						
+						new ComputerIncorrectAccusation().displayGUI(personCard.getCardName(), weaponCard.getCardName(), roomCard.getCardName());
 
 					}
 

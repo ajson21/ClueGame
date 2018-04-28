@@ -151,6 +151,7 @@ public class Board extends JPanel implements MouseListener {
 		for (Player current : playerList) {
 
 			current.addToUnknownWeapon(weaponDeck.get(weaponValue));
+			
 
 		}
 
@@ -230,6 +231,23 @@ public class Board extends JPanel implements MouseListener {
 
 			Random rand = new Random();
 			int cardIndexToDeal = rand.nextInt(gameDeck.size());
+			
+			
+			switch(gameDeck.get(cardIndexToDeal).getType()){
+			
+				case WEAPON:
+					playerList[currentPlayerToDeal].addToUnknownWeapon(gameDeck.get(cardIndexToDeal));
+					break;
+				case PERSON:
+					playerList[currentPlayerToDeal].addToUnknownPerson(gameDeck.get(cardIndexToDeal));
+					break;
+				case ROOM:
+					playerList[currentPlayerToDeal].addToUnknownRoom(gameDeck.get(cardIndexToDeal));
+					break;
+					
+			}
+			
+			
 			playerList[currentPlayerToDeal].addCard(gameDeck.get(cardIndexToDeal));
 			gameDeck.remove(cardIndexToDeal);
 			currentPlayerToDeal++;
